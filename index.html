@@ -150,6 +150,18 @@ body.favmode .fav-btn .fav-badge{background:#fff;color:#8a5a00}
   color:#6b4700;font-weight:700;font-size:11.5px;text-align:center}
 @media print{.star{display:none !important}}
 
+/* ===== 只看知识点 ===== */
+body.kpmode .hero,
+body.kpmode #howto,
+body.kpmode h2#toc,
+body.kpmode .toc,
+body.kpmode section>h3,
+body.kpmode .qcard,
+body.kpmode section>.card.good{display:none}
+body.kpmode .card.analysis{display:block;border-left-width:6px}
+body.kpmode .kp-btn{background:#2b41a8;border-color:#2b41a8;color:#fff;font-weight:700}
+@media print{.kp-btn{display:none !important}}
+
 /* ===== 中英双版（默认英文，点「译」切中文） ===== */
 .qcard .ver.zh{display:none}
 .qcard.zhmode .ver.en{display:none}
@@ -193,6 +205,7 @@ body.favmode .fav-btn .fav-badge{background:#fff;color:#8a5a00}
     <span class="chip">答案默认折叠</span>
     <span class="chip">每题中英双版 · 默认英文</span>
     <span class="chip">每专题附英文版知识点</span>
+    <span class="chip">◆ 一键只看知识点</span>
     <span class="chip">争议题已内联到原题旁</span>
     <span class="chip" title="这些真题有点老了 —— 2021 / 2022 / 2023 年的卷子，和本学期（Fall 2026）的考试范围、题型、分值分布不一定一致。请当练手材料，最终范围以本学期 syllabus / 老师给的复习提纲为准。" style="background:var(--red-soft);border-color:var(--red-line);color:#8a211a;cursor:help">⚠ 真题为 2021–2023 旧卷，范围仅供参考</span>
   </div>
@@ -203,10 +216,11 @@ body.favmode .fav-btn .fav-badge{background:#fff;color:#8a5a00}
   <button onclick="setAll(false)">全部折叠</button>
   <button class="en-btn" onclick="setEn()">英文重点模式</button>
   <button class="fav-btn" onclick="toggleFavMode()">★ 我的收藏 <span id="favBadge" class="fav-badge">0</span></button>
+  <button class="kp-btn" onclick="toggleKpMode()">◆ 只看知识点</button>
   <span class="hint" id="barHint">每道题和每个专题右上角的 <b>★</b> 点一下即收藏，收藏会连<b>对应知识点</b>一起记住；点顶部<b>「★ 我的收藏」</b>页面就只剩你收藏的题（原题 + 答案 + 解析）。答案平时藏在绿色的「答案与解析」条里 —— 先自己做一遍再点开。</span>
 </div>
 
-<div class="card tint">
+<div class="card tint" id="howto">
   <h4 style="margin-top:0">这份材料怎么用</h4>
   <ol style="margin-bottom:0">
     <li><b>按专题刷</b>：左边目录选一个专题 → 先读「专题分析」（考点 + 必背 + 易错），再自己做下面的<b>原题</b>，点开「答案与解析」核对。</li>
@@ -216,6 +230,7 @@ body.favmode .fav-btn .fav-badge{background:#fff;color:#8a5a00}
     <li><b>英文作答用哪一版</b>：每专题「专题分析」末尾都有一条蓝框 <span class="mono">EN English Key Points</span>，是该专题知识点的<b>英文版</b>（含必背术语），直接照搬写进卷子。点顶部「英文重点模式」可一键只展开全部英文版。</li>
     <li><b>有争议 / 印错的题</b>：不再单列附录，已用<span class="mono">琥珀色「争议 / 勘误」框</span>直接贴在<b>那道题的卡片末尾</b>，写明官方答案错在哪、考场该写什么。</li>
     <li><b>收藏（★）</b>：每道题目卡、每个专题「专题分析」右上角都有 <span class="mono">★</span>，点一下变实心即收藏（连<b>对应知识点</b>一起记下），再点取消。点顶部<b>「★ 我的收藏」</b>（按钮上带收藏条数），页面就只剩你收藏的题 —— <b>原题、答案、解析都直接摊开</b>，专题分析和没收藏的题全部收起；再点一次（按钮变成「★ 显示全部」）回到完整版。收藏存在本机浏览器里，<b>换浏览器 / 清缓存会丢</b>。</li>
+    <li><b>只看知识点（◆）</b>：点顶部<b>「◆ 只看知识点」</b>，页面立刻收掉全部题目，只剩 <b>18 个专题的「专题分析」</b>（覆盖原题 / 考什么 / 易错 / 必背结论 / 英文版 Key Points）和附录速记清单 —— 考前扫一遍用。<b>再点一次</b>（按钮变成「◆ 显示全部」）回到完整版。这个模式<b>打印直接就是一份知识点讲义</b>。</li>
         <li><b>中英双版怎么用</b>：每道题默认<b>整卡英文</b>（英文原题 + 英文答案与解析，保持考试原貌）。题卡右上角有个「<b>译</b>」按钮，点一下<b>题干和答案与解析一起切成中文</b>（按钮变成 <b>EN</b>，再点切回全英文）；折叠条标题也会跟着变成「答案与解析 / Answer &amp; Explanation」。打印时中英两版会一起印出来。</li>
 <li><b>2022 年卷子的答案来源</b>：2022 年 PDF <b>没有附官方答案</b>，本页 2022 年选择题 / 填空题（Q1、Q2）的答案条上均标了「本文推导」标签；Q3 大题同样为推导结果，暂未单独标注来源标签。涉及输出的题已用 Python 3.13 实跑，涉及波形的题已做像素级核对。</li>
   </ol>
@@ -4593,13 +4608,7 @@ function renderFav(){
     b.title = on ? ('正在只看你收藏的 ' + n + ' 条，点一下回到全部')
                  : ('点一下只看你收藏的 ' + n + ' 条（原题 + 答案 + 解析）');
   }
-  var h = document.getElementById('barHint');
-  if(h){
-    h.innerHTML = document.body.classList.contains('favmode')
-      ? ('正在<b>只看收藏</b>：页面只剩你收藏的 ' + n + ' 条（原题 + 答案 + 解析），再点「★ 显示全部」回到全部。')
-      : ('每道题和每个专题右上角的 <b>★</b> 点一下即收藏，收藏会连<b>对应知识点</b>一起记住；'
-         + '点顶部<b>「★ 我的收藏」</b>页面就只剩你收藏的题（原题 + 答案 + 解析）。答案平时藏在绿色的「答案与解析」条里 —— 先自己做一遍再点开。');
-  }
+  renderHint();
 }
 
 function onlyFavRefresh(){
@@ -4611,6 +4620,7 @@ function onlyFavRefresh(){
 }
 
 function onlyFav(){
+  document.body.classList.remove('kpmode');
   document.body.classList.add('favmode');
   onlyFavRefresh();
   /* 只看收藏时，收藏题的答案与解析直接展开 */
@@ -4618,6 +4628,7 @@ function onlyFav(){
     c.querySelectorAll('details.ans').forEach(function(d){ d.open = true; });
   });
   renderFav();
+  renderKp();
   window.scrollTo(0,0);
 }
 
@@ -4626,6 +4637,41 @@ function showAll(){
   var w = document.querySelector('.wrap');
   Array.prototype.forEach.call(w.children, function(el){ el.classList.remove('nothavfav'); });
   renderFav();
+}
+
+/* ===================== 只看知识点（◆） ===================== */
+var DEFAULT_HINT = '';
+
+function favHint(n){
+  return '正在<b>只看收藏</b>：页面只剩你收藏的 ' + n + ' 条（原题 + 答案 + 解析），再点「★ 显示全部」回到全部。';
+}
+function kpHint(){
+  return '正在<b>只看知识点</b>：页面只剩 18 个专题的「专题分析」（覆盖原题 / 考什么 / 易错 / 必背结论 / 英文版 Key Points）和附录速记清单，再点「◆ 显示全部」回到完整版。';
+}
+function renderHint(){
+  var h = document.getElementById('barHint');
+  if(!h) return;
+  if(document.body.classList.contains('kpmode')) h.innerHTML = kpHint();
+  else if(document.body.classList.contains('favmode')) h.innerHTML = favHint(Object.keys(fav).length);
+  else h.innerHTML = DEFAULT_HINT;
+}
+function renderKp(){
+  var b = document.querySelector('.kp-btn');
+  if(b){
+    var on = document.body.classList.contains('kpmode');
+    b.textContent = on ? '◆ 显示全部' : '◆ 只看知识点';
+    b.classList.toggle('on', on);
+    b.title = on ? '正在只看 18 个专题的知识点，点一下回到完整版'
+                 : '收掉所有题目，只看每个专题的重点与易错点（考什么 / 易错 / 必背结论 / 英文版 Key Points）';
+  }
+  renderHint();
+}
+function toggleKpMode(){
+  /* 两种只看模式互斥 */
+  if(document.body.classList.contains('favmode')) showAll();
+  document.body.classList.toggle('kpmode');
+  renderKp();
+  window.scrollTo(0,0);
 }
 
 function toggleFavMode(){
@@ -4639,6 +4685,8 @@ function toggleFavMode(){
 }
 
 /* 载入时恢复 */
+var _bhEl = document.getElementById('barHint');
+if(_bhEl) DEFAULT_HINT = _bhEl.innerHTML;
 document.querySelectorAll('[data-key]').forEach(function(h){
   if(fav[h.getAttribute('data-key')]){
     h.classList.add('fav');
@@ -4646,6 +4694,7 @@ document.querySelectorAll('[data-key]').forEach(function(h){
     if(b){ b.classList.add('on'); b.textContent = '\u2605'; }
   }
 });
+renderKp();
 renderFav();
 </script>
 
