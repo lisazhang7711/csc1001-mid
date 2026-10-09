@@ -32,8 +32,6 @@ a{color:var(--brand)}
 .chip{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:3px 11px;font-size:12.5px}
 .bar{position:sticky;top:0;z-index:9;background:rgba(246,247,249,.96);backdrop-filter:blur(6px);
   border-bottom:1px solid var(--line);padding:8px 0;margin-bottom:8px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.bar button.en-btn{background:#2b41a8;border-color:#2b41a8;color:#fff}
-.bar button.en-btn:hover{background:#22357f}
 .bar button{font:inherit;font-size:13px;padding:5px 12px;border-radius:8px;border:1px solid var(--brand-line);
   background:#fff;color:#2b41a8;cursor:pointer}
 .bar button:hover{background:var(--brand-soft)}
@@ -214,7 +212,6 @@ body.kpmode .kp-btn{background:#2b41a8;border-color:#2b41a8;color:#fff;font-weig
 <div class="bar">
   <button onclick="setAll(true)">展开全部答案</button>
   <button onclick="setAll(false)">全部折叠</button>
-  <button class="en-btn" onclick="setEn()">英文重点模式</button>
   <button class="fav-btn" onclick="toggleFavMode()">★ 我的收藏 <span id="favBadge" class="fav-badge">0</span></button>
   <button class="kp-btn" onclick="toggleKpMode()">◆ 只看知识点</button>
   <span class="hint" id="barHint">每道题和每个专题右上角的 <b>★</b> 点一下即收藏，收藏会连<b>对应知识点</b>一起记住；点顶部<b>「★ 我的收藏」</b>页面就只剩你收藏的题（原题 + 答案 + 解析）。答案平时藏在绿色的「答案与解析」条里 —— 先自己做一遍再点开。</span>
@@ -227,7 +224,7 @@ body.kpmode .kp-btn{background:#2b41a8;border-color:#2b41a8;color:#fff;font-weig
     <li><b>原题与解析在一起</b>：每道原题都带完整英文题干与选项，答案和逐步解析就在同一张卡片的折叠条里，不用来回翻。<b>默认显示英文版</b>，点题卡右上角的「译」即可看到中文翻译。</li>
     <li><b>类型题收尾</b>：每个专题末尾是 2 道同考点类型题（绿边卡片），同样是答案折叠 —— 做完点击展开，解析里会写明这一步为什么对。</li>
     <li><b>大题（Q3，占 30 分）</b>：分布在 T4 / T8 / T10 / T13 / T14 / T16 / T18，除答案外还额外附「逐行注释表」，点开就能看到每一行在干什么。</li>
-    <li><b>英文作答用哪一版</b>：每专题「专题分析」末尾都有一条蓝框 <span class="mono">EN English Key Points</span>，是该专题知识点的<b>英文版</b>（含必背术语），直接照搬写进卷子。点顶部「英文重点模式」可一键只展开全部英文版。</li>
+    <li><b>英文作答用哪一版</b>：每专题「专题分析」末尾都有一条蓝框 <span class="mono">EN English Key Points</span>，是该专题知识点的<b>英文版</b>（含必背术语），直接照搬写进卷子。</li>
     <li><b>有争议 / 印错的题</b>：不再单列附录，已用<span class="mono">琥珀色「争议 / 勘误」框</span>直接贴在<b>那道题的卡片末尾</b>，写明官方答案错在哪、考场该写什么。</li>
     <li><b>收藏（★）</b>：每道题目卡、每个专题「专题分析」右上角都有 <span class="mono">★</span>，点一下变实心即收藏（连<b>对应知识点</b>一起记下），再点取消。点顶部<b>「★ 我的收藏」</b>（按钮上带收藏条数），页面就只剩你收藏的题 —— <b>原题、答案、解析都直接摊开</b>，专题分析和没收藏的题全部收起；再点一次（按钮变成「★ 显示全部」）回到完整版。收藏存在本机浏览器里，<b>换浏览器 / 清缓存会丢</b>。</li>
     <li><b>只看知识点（◆）</b>：点顶部<b>「◆ 只看知识点」</b>，页面立刻收掉全部题目，只剩 <b>18 个专题的「专题分析」</b>（覆盖原题 / 考什么 / 易错 / 必背结论 / 英文版 Key Points）和附录速记清单 —— 考前扫一遍用。<b>再点一次</b>（按钮变成「◆ 显示全部」）回到完整版。这个模式<b>打印直接就是一份知识点讲义</b>。</li>
@@ -4544,14 +4541,6 @@ function setAll(open){
     document.querySelectorAll('details').forEach(function(d, i){ if(i < savedOpen.length) d.open = savedOpen[i]; });
   });
 })();
-function setEn(){
-  document.querySelectorAll('details').forEach(function(d){
-    d.open = d.classList.contains('en');
-  });
-  document.querySelectorAll('details.en')[0].scrollIntoView({behavior:'smooth',block:'start'});
-}
-
-
 function toggleTr(ev, btn){
   if(ev){ ev.stopPropagation(); ev.preventDefault(); }
   var card = btn.closest('.qcard');
