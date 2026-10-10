@@ -3317,20 +3317,22 @@ print(x)</code></pre>
         nonlocal n
         n += 1
         return n
-    print(inner(), inner())
+    print(inner())
+outer()
 outer()</code></pre>
     <div class="ver en">
-      <p class="stem stem-en">What does the following program print?</p>
+      <p class="stem stem-en"><span class="mono">outer()</span> is called twice. What does the program print — and is the second output the same as the first?</p>
     </div>
     <div class="ver zh">
-      <p class="stem">下面程序输出什么？</p>
+      <p class="stem">outer() 被调用了两次，程序输出什么？第二次的输出和第一次一样吗？</p>
     </div>
   </div>
   <details class="ans"><summary class="dsum">Answer &amp; Explanation</summary><div class="dbody">
-    <div class="aver en"><div class="enexp"><span class="entag">EN</span> <b>Answer:</b> <b>1 2</b>. <span class="mono">nonlocal n</span> lets inner modify the enclosing n, so the two calls raise it from 0 to 2. Delete <span class="mono">nonlocal</span> and you get UnboundLocalError.</div></div>
+    <div class="aver en"><div class="enexp"><span class="entag">EN</span> <b>Answer:</b> <b>1</b> then <b>1</b> — two identical outputs. <span class="mono">n</span> is a local variable of <span class="mono">outer</span>, so <b>every</b> call to <span class="mono">outer()</span> runs <span class="mono">n = 0</span> again from scratch. (If you called <span class="mono">inner()</span> twice <i>inside the same</i> <span class="mono">outer()</span>, you would get <b>1 2</b>, because <span class="mono">nonlocal</span> makes both calls increment the same n.) Delete <span class="mono">nonlocal</span> and you get UnboundLocalError.</div></div>
     <div class="aver zh">
-    <div class="ans-line"><b>答案：</b><span class="mono">1 2</span></div>
-    <p><b>解析：</b><span class="mono">nonlocal n</span> 让 inner 改的是<b>外层函数的 n</b>，两次调用把 n 从 0 加到 2，所以打印 1 2。若删掉 nonlocal，会报 UnboundLocalError（n 在 inner 内未定义）。</p>
+    <div class="ans-line"><b>答案：</b>两行都是 <span class="mono">1</span>（两个输出相同）</div>
+    <p><b>解析：</b><span class="mono">n</span> 是 <span class="mono">outer</span> 的<b>局部变量</b>，每调用一次 <span class="mono">outer()</span> 都会重新执行一遍 <span class="mono">n = 0</span>，所以第二次调用拿到的还是全新的 n，输出仍是 <b>1</b>——<b>不会累积成 2</b>。</p>
+    <p class="pt"><b>对比：</b>如果改成在<b>同一次</b> <span class="mono">outer()</span> 里 <span class="mono">print(inner(), inner())</span>，两次调用改的是<b>同一个 n</b>，才会输出 <b>1 2</b>。若删掉 <span class="mono">nonlocal</span>，<span class="mono">n += 1</span> 会报 UnboundLocalError（n 在 inner 内未定义）。</p>
   </div>
   </div></details>
 </div>
