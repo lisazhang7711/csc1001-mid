@@ -3285,25 +3285,25 @@ print(x)</code></pre>
 <div class="qcard drill" id="q84" data-key="D::类型题 T12-1" data-label="类型题 T12-1" data-topic="t12" data-tname="T12 · 作用域（global / 嵌套函数）" data-kp="global 的有无">
   <div class="qhead"><span class="qno">类型题 T12-1</span><span class="qmeta">global 的有无</span><button class="star" type="button" onclick="toggleStar(event,this)" title="收藏这道题和它对应的知识点">☆</button><button class="trbtn" type="button" onclick="toggleTr(event,this)" title="切换中文 / English">译</button></div>
   <div class="qbody">
-    <div class="ver en">
-      <p class="stem stem-en">Write the output; then say what happens if <span class="mono">global x</span> is removed.</p>
-    </div>
-    <div class="ver zh">
-      <p class="stem">写出输出；再说明若去掉 <span class="mono">global x</span> 会怎样。
-      <pre><code>x = 1
+    <pre><code>x = 1
 def f():
     global x
     x = x + 10
     print(x)
 f()
-print(x)</code></pre></p>
+print(x)</code></pre>
+    <div class="ver en">
+      <p class="stem stem-en">Write the output; then say what happens if <span class="mono">global x</span> is removed.</p>
+    </div>
+    <div class="ver zh">
+      <p class="stem">写出输出；再说明若去掉 <span class="mono">global x</span> 会怎样。</p>
     </div>
   </div>
   <details class="ans"><summary class="dsum">Answer &amp; Explanation</summary><div class="dbody">
     <div class="aver en"><div class="enexp"><span class="entag">EN</span> <b>Answer:</b> prints <b>11</b> and <b>11</b>; without <span class="mono">global</span> you get <b>UnboundLocalError</b>. With <span class="mono">global</span> the function changes the global x; without it x becomes a local name and <span class="mono">x = x + 10</span> reads a local that has no value yet.</div></div>
     <div class="aver zh">
     <div class="ans-line"><b>答案：</b>输出 11 和 11；去掉 global 后报 <b>UnboundLocalError</b></div>
-    <p><b>解析：</b>有 global 时函数内改的就是全局 x（1+10=11，外面也是 11）。去掉 global，函数内的 x 变成局部变量，<span class="mono">x = x + 10</span> 读的是「还没赋值的局部 x」→ UnboundLocalError。</p>
+    <p><b>解析：</b>有 global 时函数内改的就是全局 x：函数内 <span class="mono">print(x)</span> 打出 <b>11</b>，函数外再 <span class="mono">print(x)</span> 也是 <b>11</b>（同一个 x）。去掉 global，函数内的 x 变成局部变量，<span class="mono">x = x + 10</span> 读的是「还没赋值的局部 x」→ UnboundLocalError。</p>
   </div>
   </div></details>
 </div>
@@ -3311,19 +3311,19 @@ print(x)</code></pre></p>
 <div class="qcard drill" id="q85" data-key="D::类型题 T12-2" data-label="类型题 T12-2" data-topic="t12" data-tname="T12 · 作用域（global / 嵌套函数）" data-kp="nonlocal">
   <div class="qhead"><span class="qno">类型题 T12-2</span><span class="qmeta">nonlocal</span><button class="star" type="button" onclick="toggleStar(event,this)" title="收藏这道题和它对应的知识点">☆</button><button class="trbtn" type="button" onclick="toggleTr(event,this)" title="切换中文 / English">译</button></div>
   <div class="qbody">
-    <div class="ver en">
-      <p class="stem stem-en">What does the following program print?</p>
-    </div>
-    <div class="ver zh">
-      <p class="stem">下面程序输出什么？
-      <pre><code>def outer():
+    <pre><code>def outer():
     n = 0
     def inner():
         nonlocal n
         n += 1
         return n
     print(inner(), inner())
-outer()</code></pre></p>
+outer()</code></pre>
+    <div class="ver en">
+      <p class="stem stem-en">What does the following program print?</p>
+    </div>
+    <div class="ver zh">
+      <p class="stem">下面程序输出什么？</p>
     </div>
   </div>
   <details class="ans"><summary class="dsum">Answer &amp; Explanation</summary><div class="dbody">
@@ -3518,12 +3518,7 @@ No error</code></pre></div>
 <div class="qcard drill" id="q89" data-key="D::类型题 T13-1" data-label="类型题 T13-1" data-topic="t13" data-tname="T13 · 异常处理 try / except / else" data-kp="try / except / else">
   <div class="qhead"><span class="qno">类型题 T13-1</span><span class="qmeta">try / except / else</span><button class="star" type="button" onclick="toggleStar(event,this)" title="收藏这道题和它对应的知识点">☆</button><button class="trbtn" type="button" onclick="toggleTr(event,this)" title="切换中文 / English">译</button></div>
   <div class="qbody">
-    <div class="ver en">
-      <p class="stem stem-en">Write the output of the following code.</p>
-    </div>
-    <div class="ver zh">
-      <p class="stem">写出输出：
-      <pre><code>def f(v):
+    <pre><code>def f(v):
     try:
         print(int(v))
     except ValueError:
@@ -3531,7 +3526,12 @@ No error</code></pre></div>
     else:
         print("ok")
 f("12")
-f("1.5")</code></pre></p>
+f("1.5")</code></pre>
+    <div class="ver en">
+      <p class="stem stem-en">Write the output of the following code.</p>
+    </div>
+    <div class="ver zh">
+      <p class="stem">写出输出：</p>
     </div>
   </div>
   <details class="ans"><summary class="dsum">Answer &amp; Explanation</summary><div class="dbody">
@@ -3546,18 +3546,18 @@ f("1.5")</code></pre></p>
 <div class="qcard drill" id="q90" data-key="D::类型题 T13-2" data-label="类型题 T13-2" data-topic="t13" data-tname="T13 · 异常处理 try / except / else" data-kp="finally 的执行时机">
   <div class="qhead"><span class="qno">类型题 T13-2</span><span class="qmeta">finally 的执行时机</span><button class="star" type="button" onclick="toggleStar(event,this)" title="收藏这道题和它对应的知识点">☆</button><button class="trbtn" type="button" onclick="toggleTr(event,this)" title="切换中文 / English">译</button></div>
   <div class="qbody">
-    <div class="ver en">
-      <p class="stem stem-en">What does each call return, and how many times — and at what moment — is <span class="mono">"done"</span> printed?</p>
-    </div>
-    <div class="ver zh">
-      <p class="stem">下面函数的返回值分别是多少？"done" 会被打印几次、在什么时机？
-      <pre><code>def g(v):
+    <pre><code>def g(v):
     try:
         return int(v)
     except ValueError:
         return -1
     finally:
-        print("done")</code></pre></p>
+        print("done")</code></pre>
+    <div class="ver en">
+      <p class="stem stem-en">What does each call return, and how many times — and at what moment — is <span class="mono">"done"</span> printed?</p>
+    </div>
+    <div class="ver zh">
+      <p class="stem">下面函数的返回值分别是多少？"done" 会被打印几次、在什么时机？</p>
     </div>
   </div>
   <details class="ans"><summary class="dsum">Answer &amp; Explanation</summary><div class="dbody">
@@ -3997,13 +3997,13 @@ with open("myText.txt", "r") as f:
 <div class="qcard drill" id="q101" data-key="D::类型题 T15-2" data-label="类型题 T15-2" data-topic="t15" data-tname="T15 · 文件操作" data-kp="找错">
   <div class="qhead"><span class="qno">类型题 T15-2</span><span class="qmeta">找错</span><button class="star" type="button" onclick="toggleStar(event,this)" title="收藏这道题和它对应的知识点">☆</button><button class="trbtn" type="button" onclick="toggleTr(event,this)" title="切换中文 / English">译</button></div>
   <div class="qbody">
+    <pre><code>open("a.txt", "r")
+"a.txt".close()</code></pre>
     <div class="ver en">
       <p class="stem stem-en">Point out the two mistakes in the following code.</p>
     </div>
     <div class="ver zh">
-      <p class="stem">指出下面代码的两处错误：
-      <pre><code>open("a.txt", "r")
-"a.txt".close()</code></pre></p>
+      <p class="stem">指出下面代码的两处错误：</p>
     </div>
   </div>
   <details class="ans"><summary class="dsum">Answer &amp; Explanation</summary><div class="dbody">
@@ -4268,18 +4268,18 @@ while True:
 <div class="qcard drill" id="q108" data-key="D::类型题 T17-1" data-label="类型题 T17-1" data-topic="t17" data-tname="T17 · 输入循环 + 统计程序" data-kp="程序作用 + 边界">
   <div class="qhead"><span class="qno">类型题 T17-1</span><span class="qmeta">程序作用 + 边界</span><button class="star" type="button" onclick="toggleStar(event,this)" title="收藏这道题和它对应的知识点">☆</button><button class="trbtn" type="button" onclick="toggleTr(event,this)" title="切换中文 / English">译</button></div>
   <div class="qbody">
-    <div class="ver en">
-      <p class="stem stem-en">What does the following program do? What does it print if the user enters 3, 4, done? What happens if the user enters done immediately?</p>
-    </div>
-    <div class="ver zh">
-      <p class="stem">下面程序的作用是什么？如果用户输入 3、4、done，输出是什么？如果用户第一次就输入 done，会发生什么？
-      <pre><code>vals = []
+    <pre><code>vals = []
 while True:
     s = input("输入数字，或输入 done 结束：")
     if s == "done":
         break
     vals.append(float(s))
-print(sum(vals) / len(vals))</code></pre></p>
+print(sum(vals) / len(vals))</code></pre>
+    <div class="ver en">
+      <p class="stem stem-en">What does the following program do? What does it print if the user enters 3, 4, done? What happens if the user enters done immediately?</p>
+    </div>
+    <div class="ver zh">
+      <p class="stem">下面程序的作用是什么？如果用户输入 3、4、done，输出是什么？如果用户第一次就输入 done，会发生什么？</p>
     </div>
   </div>
   <details class="ans"><summary class="dsum">Answer &amp; Explanation</summary><div class="dbody">
@@ -4404,12 +4404,7 @@ print(sum(vals) / len(vals))</code></pre></p>
 <div class="qcard drill" id="q111" data-key="D::类型题 T18-1" data-label="类型题 T18-1" data-topic="t18" data-tname="T18 · 程序分析大题 + 答题模板" data-kp="程序分析（字典 → 列表 → 排序）">
   <div class="qhead"><span class="qno">类型题 T18-1</span><span class="qmeta">程序分析（字典 → 列表 → 排序）</span><button class="star" type="button" onclick="toggleStar(event,this)" title="收藏这道题和它对应的知识点">☆</button><button class="trbtn" type="button" onclick="toggleTr(event,this)" title="切换中文 / English">译</button></div>
   <div class="qbody">
-    <div class="ver en">
-      <p class="stem stem-en">Read the program and answer: &#9312; how many elements do list2 and list3 have? &#9313; what are the four print outputs?</p>
-    </div>
-    <div class="ver zh">
-      <p class="stem">读程序并回答：① list2 和 list3 各有几个元素？② 四个 print 的输出分别是什么？
-      <pre><code>myDict = {"Tom": 20, "Anna": 17, "Ben": 22}
+    <pre><code>myDict = {"Tom": 20, "Anna": 17, "Ben": 22}
 mySeq = list(myDict.items())
 list1 = []
 list2 = []
@@ -4424,7 +4419,12 @@ print(list2)
 list2.sort()
 list3 = sorted(list1)
 print(list2)
-print(list3)</code></pre></p>
+print(list3)</code></pre>
+    <div class="ver en">
+      <p class="stem stem-en">Read the program and answer: &#9312; how many elements do list2 and list3 have? &#9313; what are the four print outputs?</p>
+    </div>
+    <div class="ver zh">
+      <p class="stem">读程序并回答：① list2 和 list3 各有几个元素？② 四个 print 的输出分别是什么？</p>
     </div>
   </div>
   <details class="ans"><summary class="dsum">Answer &amp; Explanation</summary><div class="dbody">
@@ -4444,12 +4444,7 @@ print(list3)</code></pre></p>
 <div class="qcard drill" id="q112" data-key="D::类型题 T18-2" data-label="类型题 T18-2" data-topic="t18" data-tname="T18 · 程序分析大题 + 答题模板" data-kp="别名与副本输出预测">
   <div class="qhead"><span class="qno">类型题 T18-2</span><span class="qmeta">别名与副本输出预测</span><button class="star" type="button" onclick="toggleStar(event,this)" title="收藏这道题和它对应的知识点">☆</button><button class="trbtn" type="button" onclick="toggleTr(event,this)" title="切换中文 / English">译</button></div>
   <div class="qbody">
-    <div class="ver en">
-      <p class="stem stem-en">Write the output and explain why.</p>
-    </div>
-    <div class="ver zh">
-      <p class="stem">写出输出并解释原因：
-      <pre><code>list1 = list2 = []
+    <pre><code>list1 = list2 = []
 list1.append(1)
 list2.append(2)
 print(list1, list2)
@@ -4461,7 +4456,12 @@ y.append(4)
 print(x)
 z = x[:]
 z.append(5)
-print(x, z)</code></pre></p>
+print(x, z)</code></pre>
+    <div class="ver en">
+      <p class="stem stem-en">Write the output and explain why.</p>
+    </div>
+    <div class="ver zh">
+      <p class="stem">写出输出并解释原因：</p>
     </div>
   </div>
   <details class="ans"><summary class="dsum">Answer &amp; Explanation</summary><div class="dbody">
