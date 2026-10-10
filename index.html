@@ -3552,19 +3552,25 @@ f("1.5")</code></pre>
     except ValueError:
         return -1
     finally:
-        print("done")</code></pre>
+        print("done")
+
+print(g("3"))
+print(g("x"))</code></pre>
     <div class="ver en">
-      <p class="stem stem-en">What does each call return, and how many times — and at what moment — is <span class="mono">"done"</span> printed?</p>
+      <p class="stem stem-en">What does this program print? Pay attention to <b>where</b> <span class="mono">"done"</span> appears.</p>
     </div>
     <div class="ver zh">
-      <p class="stem">下面函数的返回值分别是多少？"done" 会被打印几次、在什么时机？</p>
+      <p class="stem">下面程序输出什么？特别注意 <span class="mono">"done"</span> 出现在<b>什么位置</b>。</p>
     </div>
   </div>
   <details class="ans"><summary class="dsum">Answer &amp; Explanation</summary><div class="dbody">
-    <div class="aver en"><div class="enexp"><span class="entag">EN</span> <b>Answer:</b> <span class="mono">g("3")</span> returns <b>3</b>, <span class="mono">g("x")</span> returns <b>-1</b>, and "done" is printed <b>twice</b>. <span class="mono">finally</span> always runs, even just before a return hands its value back.</div></div>
+    <div class="aver en"><div class="enexp"><span class="entag">EN</span> <b>Answer:</b><br>
+      <span class="mono">done</span><br><span class="mono">3</span><br><span class="mono">done</span><br><span class="mono">-1</span><br>
+      <span class="mono">g("3")</span> returns <b>3</b> and <span class="mono">g("x")</span> returns <b>-1</b>; "done" is printed <b>twice</b>, and <b>each time before</b> the returned value is printed, because <span class="mono">finally</span> runs before the return value is handed back.</div></div>
     <div class="aver zh">
-    <div class="ans-line"><b>答案：</b>g("3") 返回 <b>3</b>，g("x") 返回 <b>-1</b>；"done" 打印 <b>2 次</b></div>
-    <p><b>解析：</b>finally 无论走 try 还是 except 都会执行，且发生在 return 的值真正交给调用者之前——「finally 一定跑，连 return 都拦不住」。</p>
+    <div class="ans-line"><b>答案：</b><span class="mono">done / 3 / done / -1</span>（四行）</div>
+    <p><b>解析：</b>finally 无论走 try 还是 except 都会执行，且发生在 return 的值真正交给调用者<b>之前</b>——「finally 一定跑，连 return 都拦不住」。所以每次都是先打印 <span class="mono">done</span>，再打印返回值：<span class="mono">g("3")</span> 返回 3、<span class="mono">g("x")</span> 走 except 返回 -1。</p>
+    <p class="pt"><b>再加一个坑：</b>如果 <span class="mono">finally</span> 里也写了 <span class="mono">return</span>，它会<b>覆盖</b> try / except 的返回值（真题爱考这种「finally 抢跑」）。</p>
   </div>
   </div></details>
 </div>
