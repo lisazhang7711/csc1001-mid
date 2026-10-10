@@ -4853,5 +4853,36 @@ renderFav();
 })();
 </script>
 <!-- ===== /意见反馈栏 ===== -->
+<script>
+(function(){
+  var B = '__STATS_BACKEND__';
+  var S = 'csc1001-mid';
+  var K = 'st_vid';
+  var vid = '';
+  try {
+    vid = localStorage.getItem(K) || '';
+    if (!vid) {
+      vid = (crypto && crypto.randomUUID)
+        ? crypto.randomUUID()
+        : 'v' + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+      localStorage.setItem(K, vid);
+    }
+  } catch (e) { vid = ''; }
+  if (!vid) return;
+  var t0 = Date.now(), done = false;
+  function send(extra) {
+    try {
+      var u = B + '/hit?site=' + S + '&vid=' + encodeURIComponent(vid) + (extra || '');
+      if (navigator.sendBeacon) navigator.sendBeacon(u);
+      else fetch(u, { mode: 'no-cors', keepalive: true }).catch(function(){});
+    } catch (e) {}
+  }
+  function leave() { if (done) return; done = true; send('&dwell=' + Math.round((Date.now() - t0) / 1000)); }
+  send('');
+  addEventListener('pagehide', leave);
+  addEventListener('beforeunload', leave);
+  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') leave(); });
+})();
+</script>
 </body>
 </html>
