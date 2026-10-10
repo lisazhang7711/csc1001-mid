@@ -4687,5 +4687,171 @@ renderKp();
 renderFav();
 </script>
 
+
+
+<!-- ===== 意见反馈栏 feedback-widget ===== -->
+<style>
+#fb-btn{position:fixed;right:16px;bottom:16px;z-index:2147483000;display:flex;align-items:center;gap:6px;
+ padding:9px 15px;border-radius:999px;border:1px solid #d5dae1;background:#fff;color:#1b1f24;
+ font:600 14px/1 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+ cursor:pointer;box-shadow:0 4px 14px rgba(20,30,50,.16)}
+#fb-btn:hover{background:#f3f6fa}
+#fb-btn .dot{width:7px;height:7px;border-radius:50%;background:#1d4ed8}
+#fb-mask{position:fixed;inset:0;background:rgba(12,17,26,.32);z-index:2147483001;display:none}
+#fb-panel{position:fixed;right:16px;bottom:64px;width:min(92vw,384px);max-height:calc(100vh - 100px);
+ overflow:auto;z-index:2147483002;display:none;background:#fff;color:#1b1f24;color-scheme:light;
+ border:1px solid #e2e6ec;border-radius:14px;box-shadow:0 14px 44px rgba(15,22,38,.24);padding:16px 16px 14px;
+ font:14px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+#fb-panel h3{margin:0 0 4px;font-size:15px;font-weight:700}
+#fb-panel .hint{margin:0 0 12px;font-size:12.5px;color:#5b6472}
+#fb-panel label{display:block;font-size:12.5px;font-weight:600;color:#39414d;margin:10px 0 5px}
+#fb-panel select,#fb-panel textarea,#fb-panel input[type=text]{width:100%;box-sizing:border-box;
+ border:1px solid #d5dae1;border-radius:8px;padding:8px 10px;font:14px/1.5 inherit;color:#1b1f24;background:#fff}
+#fb-panel textarea{min-height:96px;resize:vertical}
+#fb-panel select:focus,#fb-panel textarea:focus,#fb-panel input:focus{outline:2px solid #1d4ed8;outline-offset:0;border-color:#1d4ed8}
+#fb-row{display:flex;align-items:center;gap:10px;margin-top:14px}
+#fb-send{flex:1;padding:9px 14px;border:none;border-radius:8px;background:#1d4ed8;color:#fff;
+ font:600 14px/1 inherit;cursor:pointer}
+#fb-send:disabled{background:#9aa6b6;cursor:not-allowed}
+#fb-cancel{padding:9px 12px;border:1px solid #d5dae1;border-radius:8px;background:#fff;color:#5b6472;
+ font:14px/1 inherit;cursor:pointer}
+#fb-status{margin-top:10px;font-size:12.5px;min-height:18px}
+#fb-status.ok{color:#0f7b4f}
+#fb-status.err{color:#b3261e}
+#fb-status.info{color:#5b6472}
+#fb-meta{margin-top:10px;font-size:11.5px;color:#8a93a0;border-top:1px dashed #e2e6ec;padding-top:8px;word-break:break-all}
+#fb-copy{display:none;margin-top:8px;width:100%;padding:8px;border:1px solid #d5dae1;border-radius:8px;
+ background:#f7f8fa;color:#39414d;font:13px/1 inherit;cursor:pointer}
+@media (max-width:480px){#fb-panel{right:8px;left:8px;width:auto;bottom:60px}}
+</style>
+<button id="fb-btn" type="button" aria-haspopup="dialog"><span class="dot"></span>反馈</button>
+<div id="fb-mask"></div>
+<div id="fb-panel" role="dialog" aria-modal="true" aria-label="意见反馈">
+  <h3>给我们提个意见</h3>
+  <p class="hint">CSC1001 期中复习包 ｜ 反馈会直接发到开发者邮箱，不公开。</p>
+  <label for="fb-type">反馈类型</label>
+  <select id="fb-type"></select>
+  <label for="fb-text">具体内容 <span style="font-weight:400;color:#8a93a0">（必填，至少 5 个字）</span></label>
+  <textarea id="fb-text" maxlength="2000" placeholder="例如：T13 第 2 题的解析和官方答案对不上；或者：希望能导出成 PDF"></textarea>
+  <label for="fb-contact">联系方式 <span style="font-weight:400;color:#8a93a0">（选填，方便回复你）</span></label>
+  <input id="fb-contact" type="text" maxlength="120" placeholder="邮箱 / 微信，可留空">
+  <div id="fb-row">
+    <button id="fb-send" type="button">发送</button>
+    <button id="fb-cancel" type="button">取消</button>
+  </div>
+  <div id="fb-status"></div>
+  <button id="fb-copy" type="button">复制反馈全文（网络不通时手动发给我）</button>
+  <div id="fb-meta"></div>
+</div>
+<script>
+(function(){
+  var SITE = "csc1001-mid", LABEL = "CSC1001 期中复习包", EP = "https://formsubmit.co/ajax/yuxinzhang3@link.cuhk.edu.cn";
+  var TYPES = "答案/解析有误|页面显示错误|想要新功能|其他".split("|");
+  var QKEY = "fb_queue_" + SITE, LKEY = "fb_last_" + SITE, HKEY = "fb_hash_" + SITE;
+  var $ = function(id){ return document.getElementById(id); };
+  var btn = $("fb-btn"), mask = $("fb-mask"), panel = $("fb-panel");
+  var sel = $("fb-type"), txt = $("fb-text"), ct = $("fb-contact");
+  var send = $("fb-send"), cancel = $("fb-cancel"), st = $("fb-status"), copy = $("fb-copy"), meta = $("fb-meta");
+  if(!btn || !panel) return;
+
+  TYPES.forEach(function(t){
+    var o = document.createElement("option"); o.value = t; o.textContent = t; sel.appendChild(o);
+  });
+  if(TYPES.length) sel.value = TYPES[0];
+
+  function ctx(){
+    var extra = "";
+    try { if (typeof window.__FEEDBACK_CTX__ === "function") extra = window.__FEEDBACK_CTX__() || ""; } catch(e){}
+    var d = new Date();
+    var pad = function(n){ return n < 10 ? "0" + n : "" + n; };
+    return [
+      "站点：" + LABEL + " (" + SITE + ")",
+      "页面：" + location.href,
+      "时间：" + d.getFullYear() + "-" + pad(d.getMonth()+1) + "-" + pad(d.getDate()) + " " + pad(d.getHours()) + ":" + pad(d.getMinutes()),
+      "UA：" + navigator.userAgent,
+      "语言：" + (navigator.language || "-") + " | 屏幕：" + window.screen.width + "x" + window.screen.height,
+      "来源：" + (document.referrer || "-")
+    ].concat(extra ? ["上下文：" + extra] : []).join("\n");
+  }
+  meta.textContent = ctx().replace(/\n/g, " ｜ ");
+
+  function open(){
+    panel.style.display = "block"; mask.style.display = "block"; meta.textContent = ctx().replace(/\n/g, " ｜ ");
+    setTimeout(function(){ txt.focus(); }, 30);
+  }
+  function close(){ panel.style.display = "none"; mask.style.display = "none"; st.textContent = ""; copy.style.display = "none"; }
+  btn.onclick = function(){ panel.style.display === "block" ? close() : open(); };
+  mask.onclick = close;
+  cancel.onclick = close;
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape" && panel.style.display === "block") close(); });
+
+  function set(msg, cls){ st.textContent = msg; st.className = cls || "info"; }
+  function queue(item){
+    try {
+      var q = JSON.parse(localStorage.getItem(QKEY) || "[]"); q.push(item);
+      localStorage.setItem(QKEY, JSON.stringify(q.slice(-20)));
+    } catch(e){}
+  }
+  function flush(silent){
+    var q = [];
+    try { q = JSON.parse(localStorage.getItem(QKEY) || "[]"); } catch(e){}
+    if(!q.length) return;
+    var left = [];
+    q.forEach(function(item){
+      fetch(EP, {method:"POST", headers:{"Content-Type":"application/json","Accept":"application/json"},
+        body: JSON.stringify(item)}).then(function(){
+          try { localStorage.setItem(QKEY, JSON.stringify(left)); } catch(e){}
+        }).catch(function(){ left.push(item); try { localStorage.setItem(QKEY, JSON.stringify(left)); } catch(e){} });
+    });
+  }
+  function hash(s){ var h = 0; for(var i=0;i<s.length;i++){ h = (h*31 + s.charCodeAt(i)) | 0; } return String(h); }
+
+  send.onclick = function(){
+    var v = (txt.value || "").trim();
+    if(v.length < 5){ set("请至少写 5 个字，方便我定位问题。", "err"); txt.focus(); return; }
+    var now = Date.now();
+    var last = parseInt(localStorage.getItem(LKEY) || "0", 10);
+    if(now - last < 10000){ set("发送太频繁了，请稍后再试。", "err"); return; }
+    var h = hash(v);
+    if(localStorage.getItem(HKEY) === h){ set("这条反馈你已经发过啦，换一条吧。", "err"); return; }
+
+    var type = sel.value || TYPES[0] || "未分类";
+    var payload = {
+      _subject: "[反馈] " + LABEL + " - " + type,
+      _captcha: "false",
+      _template: "table",
+      site: SITE,
+      type: type,
+      message: v,
+      contact: (ct.value || "").trim() || "(未留)",
+      tech: ctx()
+    };
+    send.disabled = true; set("正在发送…", "info");
+    fetch(EP, {method:"POST", headers:{"Content-Type":"application/json","Accept":"application/json"},
+      body: JSON.stringify(payload)})
+      .then(function(r){ return r.ok ? r.json().catch(function(){ return {}; }) : Promise.reject(new Error("HTTP " + r.status)); })
+      .then(function(){
+        localStorage.setItem(LKEY, String(now)); localStorage.setItem(HKEY, h);
+        send.disabled = false; set("已收到，谢谢你！", "ok"); txt.value = ""; ct.value = "";
+        setTimeout(close, 1400);
+      })
+      .catch(function(){
+        send.disabled = false; queue(payload);
+        set("发送失败（可能是网络问题）。已暂存在本机，下次打开会自动重试；也可以点下面按钮复制全文。", "err");
+        copy.style.display = "block";
+      });
+  };
+
+  copy.onclick = function(){
+    var body = "类型：" + (sel.value || TYPES[0] || "未分类") + "\n内容：" + (txt.value||"").trim() + "\n联系：" + ((ct.value||"").trim() || "(未留)") + "\n" + ctx();
+    var ta = document.createElement("textarea"); ta.value = body; document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); set("已复制，粘到邮件里发我即可。", "ok"); } catch(e){ set("复制失败，请手动选中文本。", "err"); }
+    document.body.removeChild(ta);
+  };
+
+  try { flush(true); } catch(e){}
+})();
+</script>
+<!-- ===== /意见反馈栏 ===== -->
 </body>
 </html>
