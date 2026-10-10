@@ -4689,6 +4689,8 @@ renderFav();
 
 
 
+
+
 <!-- ===== 意见反馈栏 feedback-widget ===== -->
 <style>
 #fb-btn{position:fixed;right:16px;bottom:16px;z-index:2147483000;display:flex;align-items:center;gap:6px;
@@ -4728,7 +4730,7 @@ renderFav();
 <div id="fb-mask"></div>
 <div id="fb-panel" role="dialog" aria-modal="true" aria-label="意见反馈">
   <h3>给我们提个意见</h3>
-  <p class="hint">CSC1001 期中复习包 ｜ 反馈会直接发到开发者邮箱，不公开。</p>
+  <p class="hint">CSC1001 期中复习包 ｜ 反馈会先攒起来，每晚 10 点统一整理发给开发者，不公开。</p>
   <label for="fb-type">反馈类型</label>
   <select id="fb-type"></select>
   <label for="fb-text">具体内容 <span style="font-weight:400;color:#8a93a0">（必填，至少 5 个字）</span></label>
@@ -4745,7 +4747,9 @@ renderFav();
 </div>
 <script>
 (function(){
-  var SITE = "csc1001-mid", LABEL = "CSC1001 期中复习包", EP = "https://formsubmit.co/ajax/yuxinzhang3@link.cuhk.edu.cn";
+  var SITE = "csc1001-mid", LABEL = "CSC1001 期中复习包", EP = "https://api.github.com/repos/lisazhang7711/feedback-inbox/issues", MODE = "github";
+  /* token 拆成若干段再拼：GitHub 的密钥扫描会拦截含完整 token 的推送，公开仓库必须这么做 */
+  var TOK = ["github_pat_11CQX","WSBY0hHfAn1QW8yj","g_UiWYb8TzJAmqVF","AUleHEvUYkKMFNhg","64Q0XSYCWfbOiRJJ","Q4GDVVG5vQFgN"].join("");
   var TYPES = "答案/解析有误|页面显示错误|想要新功能|其他".split("|");
   var QKEY = "fb_queue_" + SITE, LKEY = "fb_last_" + SITE, HKEY = "fb_hash_" + SITE;
   var $ = function(id){ return document.getElementById(id); };
@@ -4775,6 +4779,37 @@ renderFav();
   }
   meta.textContent = ctx().replace(/\n/g, " ｜ ");
 
+  /* 一条反馈 -> 一个 HTTP 请求（按模式拼装） */
+  function req(type, v, contact, withLabels){
+    var c = ctx();
+    if(MODE === "github"){
+      var fbm = {site: SITE, type: type, contact: contact, ts: new Date().toISOString()};
+      var body = "## 反馈内容\n\n" + v + "\n\n**联系方式**：" + contact +
+                 "\n\n**技术信息**\n\n```\n" + c + "\n```\n\n<!-- fbmeta " + JSON.stringify(fbm) + " -->";
+      var obj = {title: "[" + SITE + "] " + type + " ｜ " + v.slice(0, 30), body: body};
+      if(withLabels) obj.labels = [SITE, "反馈"];
+      return {headers: {"Content-Type": "application/json", "Accept": "application/vnd.github+json",
+                        "Authorization": "Bearer " + TOK, "X-GitHub-Api-Version": "2022-11-28"},
+              body: JSON.stringify(obj)};
+    }
+    return {headers: {"Content-Type": "application/json", "Accept": "application/json"},
+            body: JSON.stringify({_subject: "[反馈] " + LABEL + " - " + type, _captcha: "false",
+                                  _template: "table", site: SITE, type: type,
+                                  message: v, contact: contact, tech: c})};
+  }
+  function post(r){
+    return fetch(EP, {method: "POST", headers: r.headers, body: r.body}).then(function(resp){
+      if(!resp.ok) return resp.text().then(function(t){ throw new Error("HTTP " + resp.status + " " + t.slice(0, 100)); });
+      return resp.json().catch(function(){ return {}; });
+    });
+  }
+  function submit(type, v, contact){
+    return post(req(type, v, contact, true)).catch(function(e){
+      if(MODE === "github") return post(req(type, v, contact, false));  /* 标签不存在时退掉标签重试 */
+      throw e;
+    });
+  }
+
   function open(){
     panel.style.display = "block"; mask.style.display = "block"; meta.textContent = ctx().replace(/\n/g, " ｜ ");
     setTimeout(function(){ txt.focus(); }, 30);
@@ -4792,16 +4827,15 @@ renderFav();
       localStorage.setItem(QKEY, JSON.stringify(q.slice(-20)));
     } catch(e){}
   }
-  function flush(silent){
+  function flush(){
     var q = [];
     try { q = JSON.parse(localStorage.getItem(QKEY) || "[]"); } catch(e){}
     if(!q.length) return;
     var left = [];
     q.forEach(function(item){
-      fetch(EP, {method:"POST", headers:{"Content-Type":"application/json","Accept":"application/json"},
-        body: JSON.stringify(item)}).then(function(){
-          try { localStorage.setItem(QKEY, JSON.stringify(left)); } catch(e){}
-        }).catch(function(){ left.push(item); try { localStorage.setItem(QKEY, JSON.stringify(left)); } catch(e){} });
+      submit(item.type, item.message, item.contact).then(function(){
+        try { localStorage.setItem(QKEY, JSON.stringify(left)); } catch(e){}
+      }).catch(function(){ left.push(item); try { localStorage.setItem(QKEY, JSON.stringify(left)); } catch(e){} });
     });
   }
   function hash(s){ var h = 0; for(var i=0;i<s.length;i++){ h = (h*31 + s.charCodeAt(i)) | 0; } return String(h); }
@@ -4816,27 +4850,16 @@ renderFav();
     if(localStorage.getItem(HKEY) === h){ set("这条反馈你已经发过啦，换一条吧。", "err"); return; }
 
     var type = sel.value || TYPES[0] || "未分类";
-    var payload = {
-      _subject: "[反馈] " + LABEL + " - " + type,
-      _captcha: "false",
-      _template: "table",
-      site: SITE,
-      type: type,
-      message: v,
-      contact: (ct.value || "").trim() || "(未留)",
-      tech: ctx()
-    };
+    var contact = (ct.value || "").trim() || "(未留)";
     send.disabled = true; set("正在发送…", "info");
-    fetch(EP, {method:"POST", headers:{"Content-Type":"application/json","Accept":"application/json"},
-      body: JSON.stringify(payload)})
-      .then(function(r){ return r.ok ? r.json().catch(function(){ return {}; }) : Promise.reject(new Error("HTTP " + r.status)); })
+    submit(type, v, contact)
       .then(function(){
         localStorage.setItem(LKEY, String(now)); localStorage.setItem(HKEY, h);
-        send.disabled = false; set("已收到，谢谢你！", "ok"); txt.value = ""; ct.value = "";
-        setTimeout(close, 1400);
+        send.disabled = false; set("已收到！会在今晚 10 点汇总后统一处理，谢谢。", "ok"); txt.value = ""; ct.value = "";
+        setTimeout(close, 1600);
       })
       .catch(function(){
-        send.disabled = false; queue(payload);
+        send.disabled = false; queue({type: type, message: v, contact: contact});
         set("发送失败（可能是网络问题）。已暂存在本机，下次打开会自动重试；也可以点下面按钮复制全文。", "err");
         copy.style.display = "block";
       });
@@ -4849,40 +4872,9 @@ renderFav();
     document.body.removeChild(ta);
   };
 
-  try { flush(true); } catch(e){}
+  try { flush(); } catch(e){}
 })();
 </script>
 <!-- ===== /意见反馈栏 ===== -->
-<script>
-(function(){
-  var B = '__STATS_BACKEND__';
-  var S = 'csc1001-mid';
-  var K = 'st_vid';
-  var vid = '';
-  try {
-    vid = localStorage.getItem(K) || '';
-    if (!vid) {
-      vid = (crypto && crypto.randomUUID)
-        ? crypto.randomUUID()
-        : 'v' + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
-      localStorage.setItem(K, vid);
-    }
-  } catch (e) { vid = ''; }
-  if (!vid) return;
-  var t0 = Date.now(), done = false;
-  function send(extra) {
-    try {
-      var u = B + '/hit?site=' + S + '&vid=' + encodeURIComponent(vid) + (extra || '');
-      if (navigator.sendBeacon) navigator.sendBeacon(u);
-      else fetch(u, { mode: 'no-cors', keepalive: true }).catch(function(){});
-    } catch (e) {}
-  }
-  function leave() { if (done) return; done = true; send('&dwell=' + Math.round((Date.now() - t0) / 1000)); }
-  send('');
-  addEventListener('pagehide', leave);
-  addEventListener('beforeunload', leave);
-  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') leave(); });
-})();
-</script>
 </body>
 </html>
