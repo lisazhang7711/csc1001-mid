@@ -2619,7 +2619,7 @@ print(x_new)</code></pre>
 <h3>类型题</h3>
 
 <div class="qcard drill" id="q68" data-key="D::类型题 T9-1" data-label="类型题 T9-1" data-topic="t9" data-tname="T9 · 列表 / 元组 / 字典的可变性与别名陷阱" data-kp="哪些会报错">
-  <div class="qhead"><span class="qno">类型题 T9-1</span><span class="qmeta">多选 · 哪些会报错</span><button class="star" type="button" onclick="toggleStar(event,this)" title="收藏这道题和它对应的知识点">☆</button><button class="trbtn" type="button" onclick="toggleTr(event,this)" title="切换中文 / English">译</button></div>
+  <div class="qhead"><span class="qno">类型题 T9-1</span><span class="qmeta">单选 · 哪些会报错</span><button class="star" type="button" onclick="toggleStar(event,this)" title="收藏这道题和它对应的知识点">☆</button><button class="trbtn" type="button" onclick="toggleTr(event,this)" title="切换中文 / English">译</button></div>
   <div class="qbody">
     <div class="ver en">
       <p class="stem stem-en">Which of the following will raise an error?</p>
@@ -2631,7 +2631,7 @@ print(x_new)</code></pre>
       </div>
     </div>
     <div class="ver zh">
-      <p class="stem">下列哪些会报错：</p>
+      <p class="stem">下列哪一项会报错：</p>
       <div class="opts">
       <div class="op"><b>A.</b> <span class="mono">t=(1,2,3); t[0]=5</span>　<b>B.</b> <span class="mono">l=[1,2,3]; l[0]=5</span></div>
       <div class="op"><b>C.</b> <span class="mono">d={1:'a'}; d[1]='b'</span>　<b>D.</b> <span class="mono">t=(1,2); t+=(3,)</span></div>
@@ -2662,7 +2662,7 @@ print(x_new)</code></pre>
     <div class="aver en"><div class="enexp"><span class="entag">EN</span> <b>Answer:</b> &#9312; <span class="mono">[1, 2, 3, 4]</span> &#9313; <span class="mono">{'x': 9}</span>. Assignment only gives the same object a second name; to copy use <span class="mono">b = a[:]</span> or <span class="mono">e = d.copy()</span>.</div></div>
     <div class="aver zh">
     <div class="ans-line"><b>答案：</b>① [1, 2, 3, <b>4</b>]　② {'x': <b>9</b>}</div>
-    <p><b>解析：</b>赋值只是给同一个对象加了第二个名字，没有复制。想互不影响要写 <span class="mono">b = a[:]</span>、<span class="mono">e = d.copy()</span> 或 <span class="mono">dict(d)</span>。</p>
+    <p><b>解析：</b>赋值只是给同一个对象加了第二个名字，没有复制。相互不影响要写 <span class="mono">b = a[:]</span>、<span class="mono">e = d.copy()</span> 或 <span class="mono">dict(d)</span>。</p>
   </div>
   </div></details>
 </div>
