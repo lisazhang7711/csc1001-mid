@@ -198,7 +198,7 @@ body.kpmode .kp-btn{background:#2b41a8;border-color:#2b41a8;color:#fff;font-weig
   <div class="chips">
     <span class="chip">18 个专题</span>
     <span class="chip">76 道原题（含完整题干与选项）</span>
-    <span class="chip">36 道类型题</span>
+    <span class="chip">34 道类型题</span>
     <span class="chip">11 段大题代码逐行注释</span>
     <span class="chip">答案默认折叠</span>
     <span class="chip">每题中英双版 · 默认英文</span>
@@ -4087,48 +4087,6 @@ with open("myText.txt", "r") as f:
   </div></details>
 </div>
 
-<h3>类型题</h3>
-
-<div class="qcard drill" id="q104" data-key="D::类型题 T16-1" data-label="类型题 T16-1" data-topic="t16" data-tname="T16 · 注释与代码风格" data-kp="列举写法">
-  <div class="qhead"><span class="qno">类型题 T16-1</span><span class="qmeta">列举写法</span><button class="star" type="button" onclick="toggleStar(event,this)" title="收藏这道题和它对应的知识点">☆</button><button class="trbtn" type="button" onclick="toggleTr(event,this)" title="切换中文 / English">译</button></div>
-  <div class="qbody">
-    <div class="ver en">
-      <p class="stem stem-en">List every way to write a comment in Python, with one example of each.</p>
-    </div>
-    <div class="ver zh">
-      <p class="stem">写出 Python 中所有写注释的方式，并各举一例。</p>
-    </div>
-  </div>
-  <details class="ans"><summary class="dsum">Answer &amp; Explanation</summary><div class="dbody">
-    <div class="aver en"><div class="enexp"><span class="entag">EN</span> <b>Answer:</b> &#9312; single line: <span class="mono"># compute the average</span>; &#9313; triple-quoted block: <span class="mono">""" ... """</span>, which is technically a string literal but is used as a block comment or docstring.</div></div>
-    <div class="aver zh">
-    <div class="ans-line"><b>答案：</b>① 单行 <span class="mono"># 计算平均分</span>；② 三引号块注释</div>
-    <pre class="out"><code>"""
-计算平均分
-作者：xxx  2026-10
-"""</code></pre>
-  </div>
-  </div></details>
-</div>
-
-<div class="qcard drill" id="q105" data-key="D::类型题 T16-2" data-label="类型题 T16-2" data-topic="t16" data-tname="T16 · 注释与代码风格" data-kp="简答">
-  <div class="qhead"><span class="qno">类型题 T16-2</span><span class="qmeta">简答</span><button class="star" type="button" onclick="toggleStar(event,this)" title="收藏这道题和它对应的知识点">☆</button><button class="trbtn" type="button" onclick="toggleTr(event,this)" title="切换中文 / English">译</button></div>
-  <div class="qbody">
-    <div class="ver en">
-      <p class="stem stem-en">What are the advantages of writing comments? Give at least two.</p>
-    </div>
-    <div class="ver zh">
-      <p class="stem">写注释有什么好处？至少写出两点。</p>
-    </div>
-  </div>
-  <details class="ans"><summary class="dsum">Answer &amp; Explanation</summary><div class="dbody">
-    <div class="aver en"><div class="enexp"><span class="entag">EN</span> <b>Answer:</b> any two of: <b>describe what is going to happen</b>; <b>document who wrote the code</b> and other important information; <b>turn off a line of code</b> temporarily while debugging. Number your points and try to use the official wording.</div></div>
-    <div class="aver zh">
-    <div class="ans-line"><b>答案：</b>见上题三条，任写两条</div>
-    <p><b>解析：</b>答题时用「①…②…」分点，并尽量踩中官方用词：what is going to happen / who wrote the code / turn off a line of code。</p>
-  </div>
-  </div></details>
-</div>
 </section>
 
 <!-- ============================ T17 ============================ -->
@@ -4510,7 +4468,7 @@ True            ← is 判断「是不是同一个对象」
 <div class="footer">
   <p><b>资料来源：</b>【CSC1001题库】-2021_MidWithSolution.pdf（10 页）、2022_Mid.pdf（8 页）、2023_MidWithSolution.pdf（11 页）。</p>
   <p><b>核对方式：</b>页面文本提取 + 内嵌原图（题干中的代码截图与 NRZI 波形均直接嵌入试卷原始图片）+ 所有可运行代码片段在 Python 3.13 实跑验证 + 波形按像素逐列解码比对网格线。凡有疑问一律以代码运行结果为准 ——：所有与官方答案不一致、或题面本身印错的地方，都已用琥珀色「争议 / 勘误」框直接标在<b>该题卡片末尾</b>。</p>
-  <p><b>内容规模：</b>18 个专题（每个专题都含中文专题分析 + <b>英文版知识点 English Key Points</b>）= <b>76 道原题</b>（2021 年 24 道 + 2022 年 26 道 + 2023 年 26 道：Q1 与 Q2 共 60 道选择题，Q3 拆成 16 个大题小问）+ <b>36 道类型题</b>（18 个专题 × 2 道）+ <b>11 段大题代码逐行注释</b>。把 <b>112 道题全部做成中英双版</b>：默认显示<b>英文版</b>，题卡右上角的「译」按钮一键切换中文版；每条「答案与解析」的<b>最上方都有一条英文版解析</b>（蓝色 EN 块），下面是中文详解。所有答案与解析默认折叠，点击展开。</p>
+  <p><b>内容规模：</b>18 个专题（每个专题都含中文专题分析 + <b>英文版知识点 English Key Points</b>）= <b>76 道原题</b>（2021 年 24 道 + 2022 年 26 道 + 2023 年 26 道：Q1 与 Q2 共 60 道选择题，Q3 拆成 16 个大题小问）+ <b>34 道类型题</b>（17 个专题 × 2 道，T16 未设类型题）+ <b>11 段大题代码逐行注释</b>。把 <b>110 道题全部做成中英双版</b>：默认显示<b>英文版</b>，题卡右上角的「译」按钮一键切换中文版；每条「答案与解析」的<b>最上方都有一条英文版解析</b>（蓝色 EN 块），下面是中文详解。所有答案与解析默认折叠，点击展开。</p>
 </div>
 
 </div>
