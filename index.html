@@ -4273,7 +4273,46 @@ print(sum(vals) / len(vals))</code></pre>
   <h4>「执行多少次迭代」怎么数</h4>
   <p class="small">把每个 num 的内层<b>实际</b>迭代次数加起来：10 一进循环就被 2 整除（只跑 1 次）、11 要跑满 9 次、12 跑 1 次、13 跑满 11 次、14 跑 1 次、15 跑到 i=3 才 break（2 次）、16 跑 1 次、17 跑满 15 次、18 跑 1 次、19 跑满 17 次 → 合计 <b>59</b> 次。</p>
 
-  <details class="en"><summary class="dsum"><span class="en-badge">EN</span>English Key Points · 本专题知识点的英文版（英文考试直接背这个）</summary><div class="dbody">
+  
+  <h4>程序分析大题的四种问法与对策</h4>
+  <ul>
+    <li><b>① 数迭代次数</b>：把内层<b>实际</b>执行次数逐个外层值累加；有 break / continue 就按实际跑的轮数算，不要拿公式硬套。</li>
+    <li><b>② 写前 N 行输出</b>：一行一行模拟——先记下这一轮各变量的值，再原样抄 print 会打出的内容（含参数间自动加的空格）。</li>
+    <li><b>③ 改代码后重新推导</b>：range 起点终点或条件一改，<b>从零重算</b>，旧计数一个都不能沿用。</li>
+    <li><b>④ 解释某行 / 某段的作用</b>：按「输入 → 做什么 → 对结果的影响」三段式答，点出关键词（flag 标志位、break 提前结束等）。</li>
+  </ul>
+
+  <h4>flag（标志位）三句话</h4>
+  <ul>
+    <li>外层<b>每轮开头</b>都要 <span class="mono">flag = True</span>——不重置，上一轮的结果会泄漏到这一轮（本卷易错点）。</li>
+    <li>循环体里发现「目标情况」就改成 <span class="mono">False</span>（本题：num 能被 i 整除 → 不是素数）。</li>
+    <li>内层跑完后 <span class="mono">if flag:</span> 统一判定——2021 Q3.4 判素数的全部逻辑就这三句。</li>
+  </ul>
+
+  <h4>trace 表长什么样（以 num = 15 为例）</h4>
+  <table>
+    <tr><th style="width:64px">轮次</th><th style="width:56px">i</th><th style="width:88px">num % i</th><th>动作</th></tr>
+    <tr><td>1</td><td>2</td><td>1</td><td>不整除，i 加 1 继续</td></tr>
+    <tr><td>2</td><td>3</td><td>0</td><td>整除 → j = 15//3 = 5，打印 <span class="mono">15 is 3 * 5</span>，flag=False，break</td></tr>
+  </table>
+  <p class="small">内层只跑 2 轮就 break；外层继续 num=16（1 轮）、17（跑满 15 轮）……最后 flag 仍为 True 的只有 11、13、17、19。</p>
+
+  <h4>输出格式的两个细节</h4>
+  <ul>
+    <li><span class="mono">print(num, 'is a prime')</span>：多个参数之间<b>自动加一个空格</b> → <span class="mono">17 is a prime</span>，手写答案别丢这个空格。</li>
+    <li><span class="mono">print('%d is %d * %d' % (num, i, j))</span>：格式化模板，%d 按顺序替换后面括号里的整数，模板里写了什么（含空格）输出就有什么。</li>
+  </ul>
+
+<h4>大题答题模板（考场默写这 5 句，每题都能拿分）</h4>
+<ol style="margin-bottom:0">
+  <li><b>数次数</b>：外层 range(a,b) 跑 b−a 次；内层同理；有 −1 就少一轮，最后一个元素不参与。</li>
+  <li><b>写值</b>：按行追踪变量——每行末尾把关键变量的当前值写在草稿纸上，尤其是 append / += 之后的列表。</li>
+  <li><b>看分支</b>：continue 只影响本轮；break 结束整个循环；except 接住异常后 try 里剩下的不执行。</li>
+  <li><b>标类型</b>：(k,v) → tuple；用 + 拼过的 → str；sorted() 返回新列表、sort() 返回 None。</li>
+  <li><b>说差异</b>：问两个写法的差别，就答「就地改 vs 新建」「别名 vs 副本」这两组词。</li>
+</ol>
+
+<details class="en"><summary class="dsum"><span class="en-badge">EN</span>English Key Points · 本专题知识点的英文版（英文考试直接背这个）</summary><div class="dbody">
     <ul>
 <li><b>Counting iterations means adding up how many times the inner loop actually runs for each outer value</b> — not just counting the outer passes. In 2021 Q3.4: 10 is divisible by 2 immediately (1 pass), 11 runs all 9, 12 → 1, 13 → 11, 14 → 1, 15 breaks at i=3 (2 passes), 16 → 1, 17 → 15, 18 → 1, 19 → 17; total <b>59</b>.</li>
 <li>A <b>flag</b> variable records whether something happened; remember that it must be <b>reset at the start of every outer round</b>.</li>
@@ -4335,16 +4374,6 @@ print(sum(vals) / len(vals))</code></pre>
   </div></details>
 </div>
 
-<div class="card good">
-<h4 style="margin-top:0">大题答题模板（考场默写这 5 句，每题都能拿分）</h4>
-<ol style="margin-bottom:0">
-  <li><b>数次数</b>：外层 range(a,b) 跑 b−a 次；内层同理；有 −1 就少一轮，最后一个元素不参与。</li>
-  <li><b>写值</b>：按行追踪变量——每行末尾把关键变量的当前值写在草稿纸上，尤其是 append / += 之后的列表。</li>
-  <li><b>看分支</b>：continue 只影响本轮；break 结束整个循环；except 接住异常后 try 里剩下的不执行。</li>
-  <li><b>标类型</b>：(k,v) → tuple；用 + 拼过的 → str；sorted() 返回新列表、sort() 返回 None。</li>
-  <li><b>说差异</b>：问两个写法的差别，就答「就地改 vs 新建」「别名 vs 副本」这两组词。</li>
-</ol>
-</div>
 
 <h3>类型题</h3>
 
