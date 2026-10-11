@@ -3849,25 +3849,6 @@ The list sorted by values:
 
 <h3>类型题</h3>
 
-<div class="qcard drill" id="q96" data-key="D::类型题 T14-1" data-label="类型题 T14-1" data-topic="t14" data-tname="T14 · 排序与字典转换（sort vs sorted）" data-kp="items / sorted / key">
-  <div class="qhead"><span class="qno">类型题 T14-1</span><span class="qmeta">items / sorted / key</span><button class="star" type="button" onclick="toggleStar(event,this)" title="收藏这道题和它对应的知识点">☆</button><button class="trbtn" type="button" onclick="toggleTr(event,this)" title="切换中文 / English">译</button></div>
-  <div class="qbody">
-    <div class="ver en">
-      <p class="stem stem-en">Let <span class="mono">d = {'b': 2, 'a': 1}</span>. Give the value of <span class="mono">list(d.items())</span>, <span class="mono">sorted(list(d.items()))</span>, <span class="mono">sorted(list(d.items()), key=lambda x: x[1], reverse=True)</span>, <span class="mono">list(d)</span> and <span class="mono">sorted(d)</span>.</p>
-    </div>
-    <div class="ver zh">
-      <p class="stem">设 <span class="mono">d = {'b': 2, 'a': 1}</span>，写出 <span class="mono">list(d.items())</span>、<span class="mono">sorted(list(d.items()))</span>、<span class="mono">sorted(list(d.items()), key=lambda x: x[1], reverse=True)</span>、<span class="mono">list(d)</span>、<span class="mono">sorted(d)</span> 的结果。</p>
-    </div>
-  </div>
-  <details class="ans"><summary class="dsum">Answer &amp; Explanation</summary><div class="dbody">
-    <div class="aver en"><div class="enexp"><span class="entag">EN</span> <b>Answer:</b> [('b',2),('a',1)]; [('a',1),('b',2)]; [('b',2),('a',1)]; ['b','a']; ['a','b']. <span class="mono">sorted</span> compares tuples by their <b>first</b> element unless you pass <span class="mono">key=</span>.</div></div>
-    <div class="aver zh">
-    <div class="ans-line"><b>答案：</b><span class="mono">[('b',2), ('a',1)]</span>；<span class="mono">[('a',1), ('b',2)]</span>；<span class="mono">[('b',2), ('a',1)]</span>；<span class="mono">['b','a']</span>；<span class="mono">['a','b']</span></div>
-    <p><b>解析：</b>items 保持插入顺序；sorted 默认按元组第一个元素（键）排；<span class="mono">key=lambda x: x[1]</span> 改成按值排，reverse=True 降序；<span class="mono">list(d)</span> 得到键列表（仍是插入顺序），<span class="mono">sorted(d)</span> 把键排好序。</p>
-  </div>
-  </div></details>
-</div>
-
 <div class="qcard drill" id="q97" data-key="D::类型题 T14-2" data-label="类型题 T14-2" data-topic="t14" data-tname="T14 · 排序与字典转换（sort vs sorted）" data-kp="sort 与 sorted 的区别">
   <div class="qhead"><span class="qno">类型题 T14-2</span><span class="qmeta">sort 与 sorted 的区别</span><button class="star" type="button" onclick="toggleStar(event,this)" title="收藏这道题和它对应的知识点">☆</button><button class="trbtn" type="button" onclick="toggleTr(event,this)" title="切换中文 / English">译</button></div>
   <div class="qbody">
