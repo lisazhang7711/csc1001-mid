@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AIE1001 × CSC1001 考点差异对照 · Week1–5</title>
+
+<style>
+
+
+:root{
+
+  --bg:#f6f7f9; --panel:#ffffff; --ink:#1c2331; --ink2:#4a5568; --ink3:#718096;
+
+  --line:#e2e6ec; --brand:#3551c8; --brand-soft:#eef1fd; --brand-line:#d7ddfa;
+
+  --green:#0f7b52; --green-soft:#e8f6f0; --green-line:#c9e9dc;
+
+  --amber:#a1620b; --amber-soft:#fdf4e5; --amber-line:#f0dcb8;
+
+  --red:#b3261e; --red-soft:#fdeceb; --red-line:#f3cfcc;
+
+  --code:#f3f4f7;
+
+}
+
+*{box-sizing:border-box}
+
+body{margin:0;background:var(--bg);color:var(--ink);
+
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+
+  font-size:15px;line-height:1.72;-webkit-font-smoothing:antialiased}
+
+.wrap{max-width:1060px;margin:0 auto;padding:24px 18px 90px}
+
+code,kbd,pre,.mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace}
+
+h1{font-size:25px;margin:0 0 6px;letter-spacing:.2px}
+
+h2{font-size:19.5px;margin:34px 0 10px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+
+h3{font-size:16px;margin:20px 0 6px}
+
+h4{font-size:14.5px;margin:14px 0 4px;color:var(--ink2)}
+
+p{margin:7px 0}
+
+a{color:var(--brand)}
+
+.hero{background:linear-gradient(135deg,#3551c8 0%,#5a3fc0 100%);color:#fff;border-radius:14px;padding:20px 22px;margin-bottom:18px}
+
+.hero h1{color:#fff}
+
+.hero p{color:#e6e9fb;margin:6px 0 0;font-size:13.5px}
+
+.chips{margin-top:12px;display:flex;flex-wrap:wrap;gap:7px}
+
+.chip{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:3px 11px;font-size:12.5px}
+
+.bar{position:sticky;top:0;z-index:9;background:rgba(246,247,249,.96);backdrop-filter:blur(6px);
+
+  border-bottom:1px solid var(--line);padding:8px 0;margin-bottom:8px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+.bar button{font:inherit;font-size:13px;padding:5px 12px;border-radius:8px;border:1px solid var(--brand-line);
+
+  background:#fff;color:#2b41a8;cursor:pointer}
+
+.bar button:hover{background:var(--brand-soft)}
+
+.bar .hint{font-size:12.5px;color:var(--ink3)}
+
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0}
+
+.card.tint{background:var(--brand-soft);border-color:var(--brand-line)}
+
+.card.warn{background:var(--amber-soft);border-color:var(--amber-line)}
+
+.card.bad{background:var(--red-soft);border-color:var(--red-line)}
+
+.card.good{background:var(--green-soft);border-color:var(--green-line)}
+
+.card.analysis{background:#fbfcff;border-color:var(--brand-line);border-left:4px solid var(--brand)}
+
+table{width:100%;border-collapse:collapse;background:#fff;font-size:13.8px;margin:9px 0;border-radius:9px;overflow:hidden}
+
+th,td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+
+th{background:#f0f2f7;font-weight:600;font-size:13.2px;color:var(--ink2)}
+
+td.k{white-space:nowrap;font-weight:600}
+
+.small{font-size:12.8px;color:var(--ink2)}
+
+.tag{display:inline-block;font-size:11.5px;padding:1px 8px;border-radius:6px;background:#eef0f5;color:var(--ink2);margin-right:5px;white-space:nowrap}
+
+.tag.b{background:var(--brand-soft);color:#2b41a8}
+
+.tag.g{background:var(--green-soft);color:var(--green)}
+
+.tag.a{background:var(--amber-soft);color:var(--amber)}
+
+.tag.r{background:var(--red-soft);color:var(--red)}
+
+pre{background:var(--code);border:1px solid var(--line);border-left:3px solid #b9c2d8;border-radius:8px;
+
+  padding:10px 12px;overflow-x:auto;font-size:13px;line-height:1.58;margin:8px 0}
+
+pre.out{background:#f7f9fb;border-left-color:#8fd0b4}
+
+pre code{white-space:pre}
+
+ul,ol{margin:6px 0 6px 20px;padding:0}
+
+li{margin:3px 0}
+
+hr{border:0;border-top:1px solid var(--line);margin:22px 0}
+
+.svgbox,.imgbox{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;margin:8px 0;overflow-x:auto;text-align:center}
+
+.imgbox img{max-width:100%;height:auto;display:inline-block}
+
+.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:7px;margin:10px 0}
+
+.toc a{display:block;background:#fff;border:1px solid var(--line);border-radius:9px;padding:8px 11px;
+
+  color:var(--brand);text-decoration:none;font-size:13.5px}
+
+.toc a:hover{background:var(--brand-soft)}
+
+.toc a b{display:block;font-weight:600;font-size:12px;color:var(--ink3)}
+
+.anchor{scroll-margin-top:56px}
+
+
+
+/* --- 原题卡 --- */
+
+.qcard{background:#fff;border:1px solid var(--line);border-radius:11px;padding:0;margin:12px 0;overflow:hidden}
+
+.qcard.past{border-left:4px solid var(--brand)}
+
+.qcard.drill{border-left:4px solid var(--green)}
+
+.qhead{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 13px;background:#f7f8fb;border-bottom:1px solid var(--line)}
+
+.qno{font-weight:700;font-size:13.5px;color:#2b41a8}
+
+.qcard.drill .qno{color:var(--green)}
+
+.qmeta{font-size:12px;color:var(--ink3)}
+
+.qbody{padding:10px 14px 4px}
+
+.stem{margin:0 0 6px}
+
+.stem-en{font-size:14.6px}
+
+.opts{margin:6px 0 4px;display:grid;gap:3px}
+
+.op{font-size:14px;padding:1px 0}
+
+.op b{color:#2b41a8}
+
+.codeblk{margin:6px 0}
+
+/* --- 折叠 --- */
+
+details{border:1px solid var(--brand-line);background:#fbfdff;border-radius:9px;margin:9px 0}
+
+details>.dsum{cursor:pointer;padding:7px 12px;font-size:13.3px;font-weight:600;color:#2b41a8;
+
+  display:flex;align-items:center;gap:7px;list-style:none;user-select:none}
+
+details>.dsum::-webkit-details-marker{display:none}
+
+details>.dsum::before{content:"▶";font-size:9px;color:#8a97b5;transition:transform .15s}
+
+details[open]>.dsum::before{transform:rotate(90deg)}
+
+details>.dsum:hover{background:var(--brand-soft);border-radius:8px}
+
+.dbody{padding:2px 14px 12px;border-top:1px dashed var(--brand-line)}
+
+details.ans{border-color:var(--green-line);background:#fbfefd}
+
+details.ans>.dsum{color:var(--green)}
+
+details.ans>.dsum:hover{background:var(--green-soft)}
+
+details.ans>.dbody{border-top-color:var(--green-line)}
+
+details.line{border-color:#e5e7ee;background:#fdfdfe}
+
+details.line>.dsum{color:var(--ink2)}
+
+details.line>.dsum:hover{background:#f2f3f7}
+
+details.line>.dbody{border-top-color:#e5e7ee}
+
+.ans-line{background:var(--green-soft);border:1px solid var(--green-line);border-radius:8px;padding:7px 12px;margin:8px 0;font-size:14px}
+
+.ans-line b{color:var(--green)}
+
+.pt{font-size:13.5px;color:var(--ink2)}
+
+.pt b{color:var(--ink)}
+
+.err{background:var(--amber-soft);border:1px solid var(--amber-line);border-radius:8px;padding:7px 12px;margin:8px 0;font-size:13.5px}
+
+.topic{background:#fff;border:1px solid var(--line);border-radius:14px;padding:4px 16px 16px;margin:20px 0}
+
+.topic>h2{margin-top:14px;border-bottom-width:2px}
+
+.freq{font-size:12px;font-weight:400;color:var(--ink3);background:#f0f2f7;border-radius:999px;padding:2px 10px;vertical-align:2px}
+
+details.en{border-color:#c3cef6;background:#f9fbff}
+
+details.en>.dsum{color:#2b41a8}
+
+details.en>.dsum:hover{background:var(--brand-soft)}
+
+details.en>.dbody{border-top-color:var(--brand-line)}
+
+details.en ul{margin:6px 0 10px}
+
+details.en li{font-size:13.6px;line-height:1.72;margin:5px 0}
+
+details.en .mono{font-size:12.6px}
+
+.en-badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.6px;color:#fff;
+
+  background:#2b41a8;border-radius:4px;padding:1px 6px;vertical-align:2px;margin-right:7px}
+
+.err b{color:#8a5200}
+
+.footer{margin-top:34px;padding-top:14px;border-top:1px dashed var(--line);color:var(--ink3);font-size:12.8px}
+
+@media print{
+
+  body{background:#fff;font-size:11.5px}
+
+  .bar{display:none}
+
+  .hero{background:#fff;color:#000;border:1px solid #999}
+
+  .hero h1,.hero p,.hero .chip{color:#000}
+
+  .chip{border-color:#bbb}
+
+  details{border-color:#bbb}
+
+  .card,table,pre,.svgbox,.imgbox,.qcard{break-inside:avoid}
+
+}
+
+
+
+/* ===== 收藏功能 ===== */
+
+.qhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+
+.star{margin-left:auto;border:1px solid #e3e8f2;background:#fff;color:#b9902a;border-radius:7px;
+
+  padding:1px 8px;font-size:14px;line-height:1.6;cursor:pointer;font-family:inherit}
+
+.star:hover{background:#fff8e6;border-color:#e0a800}
+
+.star.on{background:#ffcf3f;border-color:#d99a00;color:#6b4700;font-weight:700}
+
+.qcard.fav{box-shadow:inset 4px 0 0 #ffcf3f,0 1px 3px rgba(0,0,0,.05)}
+
+.qcard.fav .qno{background:#fff3cf;border-radius:4px;padding:0 5px}
+
+.card.analysis.fav{border-color:#e0a800 !important;background:#fffdf5}
+
+body.favmode .wrap > .nothavfav{display:none}
+
+body.favmode section h3{display:none}
+
+body.favmode .card.analysis:not(.fav){display:none}
+
+body.favmode .qcard:not(.fav){display:none}
+
+body.favmode .fav-btn{background:#ffcf3f;border-color:#d99a00;color:#6b4700;font-weight:700}
+
+body.favmode .fav-btn .fav-badge{background:#fff;color:#8a5a00}
+
+.fav-badge{display:inline-block;min-width:17px;padding:0 5px;border-radius:9px;background:#ffcf3f;
+
+  color:#6b4700;font-weight:700;font-size:11.5px;text-align:center}
+
+@media print{.star{display:none !important}}
+
+
+
+/* ===== 只看知识点 ===== */
+
+body.kpmode .hero,
+
+body.kpmode #howto,
+
+body.kpmode h2#toc,
+
+body.kpmode .toc,
+
+body.kpmode section>h3,
+
+body.kpmode .qcard,
+
+body.kpmode section>.card.good{display:none}
+
+body.kpmode .card.analysis{display:block;border-left-width:6px}
+
+body.kpmode .kp-btn{background:#2b41a8;border-color:#2b41a8;color:#fff;font-weight:700}
+
+@media print{.kp-btn{display:none !important}}
+
+
+
+/* ===== 中英双版（默认英文，点「译」切中文） ===== */
+
+.qcard .ver.zh{display:none}
+
+.qcard.zhmode .ver.en{display:none}
+
+.qcard.zhmode .ver.zh{display:block}
+
+/* 答案与解析同样分中英两版，跟着题卡的「译」一起切 */
+
+.qcard .aver.zh{display:none}
+
+.qcard.zhmode .aver.en{display:none}
+
+.qcard.zhmode .aver.zh{display:block}
+
+.trbtn{border:1px solid #e3e8f2;background:#fff;color:#5a6b8c;border-radius:7px;
+
+  padding:1px 8px;font-size:12.5px;line-height:1.6;cursor:pointer;font-family:inherit}
+
+.trbtn:hover{background:#eef3ff;border-color:#2b41a8;color:#2b41a8}
+
+.trbtn.on{background:#2b41a8;border-color:#2b41a8;color:#fff;font-weight:600}
+
+.ver.en .stem-en{font-weight:500}
+
+.ver .opts{margin-top:7px}
+
+.enexp{background:#eef3ff;border-left:3px solid var(--brand);border-radius:8px;
+
+  padding:8px 11px;margin:0 0 9px;font-size:13.2px;line-height:1.78;color:#22335c}
+
+.enexp .entag{display:inline-block;background:#2b41a8;color:#fff;border-radius:5px;
+
+  font-size:10.5px;font-weight:700;padding:1px 5px;margin-right:6px;letter-spacing:.5px}
+
+@media print{
+
+  .trbtn{display:none !important}
+
+  .qcard .ver.zh{display:block !important}
+
+  .qcard .ver.en{display:block !important}
+
+  .qcard.zhmode .ver.en{display:block !important}
+
+  .qcard .aver.zh{display:block !important}
+
+  .qcard .aver.en{display:block !important}
+
+}
+
+
+
+
+
+.tag{display:inline-block;font-size:12.5px;padding:2px 9px;border-radius:999px;
+  border:1px solid var(--line);text-decoration:none;white-space:nowrap}
+.tag.both{background:var(--green-soft);border-color:var(--green-line);color:#0b5c3e}
+.tag.aie{background:var(--amber-soft);border-color:var(--amber-line);color:#8a5a08}
+.tag.site{background:var(--brand-soft);border-color:var(--brand-line);color:#2b41a8}
+.src{display:inline-block;font-size:12px;color:var(--ink3);background:#f0f2f7;
+  border:1px solid var(--line);border-radius:6px;padding:1px 7px;margin-left:6px;font-weight:400}
+pre{background:var(--code);border:1px solid var(--line);border-radius:8px;
+  padding:9px 12px;overflow:auto;font-size:13px;line-height:1.6;margin:8px 0}
+.toc a{display:block}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="wrap">
+
+<div class="hero">
+  <h1>AIE1001 × CSC1001 · 考点差异对照</h1>
+  <p>左边是 AIE1001 的 Week1–Week5 课件（Lecture 1–5，Prof. Junjie Hu），右边是本复习站的 18 个专题。
+     点琥珀色的「只有 AIE 有」任意一行，会跳到本页下方的对应内容卡片 —— 那是本站没有、但 AIE 会考的东西。</p>
+  <div class="chips">
+    <span class="chip">对照 34 个知识块</span>
+    <span class="chip">23 块两边都考</span>
+    <span class="chip">10 块只有 AIE 有</span>
+    <span class="chip">1 块只有本站有</span>
+    <span class="chip">AIE 范围：Week1–Week5</span>
+  </div>
+</div>
+
+<div class="bar">
+  <a href="index.html" style="text-decoration:none"><button>← 返回复习站</button></a>
+  <a href="#aie-only" style="text-decoration:none"><button>直接看 AIE 独有内容</button></a>
+  <span class="hint">对照口径：AIE1001 Lecture 1–5 的课件正文 + 课内练习题；本站为 2021–2023 三年真题聚合出的 18 个专题。</span>
+</div>
+
+<div class="card warn">
+  <h4 style="margin-top:0">怎么读这张表</h4>
+  <p style="margin-bottom:0">
+    <b>两边都考</b>（绿）：复习站已有专题，直接看本站就够，AIE 侧只是讲法不同。<br>
+    <b>只有 AIE 有</b>（琥珀）：本站的真题里没出现过、但 AIE 课件明确讲了 —— <b>点这一行会跳到本页下方的讲解卡片</b>。<br>
+    <b>只有本站有</b>（蓝）：AIE Week1–5 课件里没有，只在 C1001 考，别把时间花错地方。
+  </p>
+</div>
+
+<h2 class="anchor" id="matrix">对照表 · 34 个知识块</h2>
+
+<table>
+  <tr>
+    <th style="width:210px">知识块</th>
+    <th style="width:150px">本站 C1001</th>
+    <th style="width:150px">AIE1001</th>
+    <th>结论</th>
+  </tr>
+
+  <tr><td colspan="4" style="background:#f0f2f7;font-weight:600">一、计算机基础（AIE Week1）</td></tr>
+  <tr><td>冯·诺依曼结构 / CPU 的 CU 与 ALU / 存储层次</td><td>T1</td><td>W1</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>操作系统定位（低级程序、提供基本服务）</td><td>T1</td><td>W1</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>编译器 vs 解释器</td><td>T1</td><td>W2</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>高级语言 / 低级语言：开发效率 vs 执行效率</td><td>T1</td><td>W1</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>机器语言与汇编语言</td><td>T1</td><td>W1</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>语言发展史：C / C++ / Java / Python 的作者与年代</td><td>—</td><td>W1</td><td><a class="tag aie" href="#a1">只有 AIE 有 →</a></td></tr>
+  <tr><td>抽象层次：机器语言→汇编→C→Python；硬件→OS→应用</td><td>—</td><td>W1</td><td><a class="tag aie" href="#a2">只有 AIE 有 →</a></td></tr>
+  <tr><td>信息单位 bit / Byte / KB=2¹⁰ / MB / GB / TB</td><td>T2</td><td>W1</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>内存按字节编址、每个单元有唯一地址</td><td>T1</td><td>W1</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>二 / 八 / 十 / 十六进制互转（含小数）</td><td>T3</td><td>W1</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>二↔八 三位分组、二↔十六 四位分组</td><td>T3</td><td>W1</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>十进制小数 → 二进制：乘 2 取整</td><td>T3</td><td>W1</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>NRZI 编码（看图译码 / 给码画图）</td><td>T4</td><td>—</td><td><a class="tag site" href="index.html#t4">只有本站有 →</a></td></tr>
+
+  <tr><td colspan="4" style="background:#f0f2f7;font-weight:600">二、Python 基础语法（AIE Week2）</td></tr>
+  <tr><td>标识符命名规则与保留字</td><td>T5</td><td>W2</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>变量 = 内存中带名字的存储位置</td><td>T5</td><td>W2</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>常量：Python 不能真声明，全大写只是约定</td><td>—</td><td>W2</td><td><a class="tag aie" href="#a3">只有 AIE 有 →</a></td></tr>
+  <tr><td>int / float / str 与 type()</td><td>T7</td><td>W2</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>类型转换 int() / float() / str()，含隐式转换</td><td>T7</td><td>W2</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>eval()：把字符串当表达式求值</td><td>T7</td><td>W2</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>运算符优先级（() → ** → * / % → + -）</td><td>T6</td><td>W2</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>整除 // 与取余 %（含负数：-2 // 3 = -1）</td><td>T6</td><td>W2</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>divmod() 一次拿到商和余数</td><td>—</td><td>W2</td><td><a class="tag aie" href="#a4">只有 AIE 有 →</a></td></tr>
+  <tr><td>级联赋值 / 同时赋值交换两个变量</td><td>T6</td><td>W2</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>print() 的 sep / end 参数</td><td>T8 / T16</td><td>W2</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>input() 返回的一定是字符串</td><td>T17</td><td>W2</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>注释 # 的三种用途</td><td>T16</td><td>W2</td><td><span class="tag both">两边都考</span></td></tr>
+
+  <tr><td colspan="4" style="background:#f0f2f7;font-weight:600">三、流程控制（AIE Week3）</td></tr>
+  <tr><td>比较运算符、= 与 == 的区别</td><td>T6 / T10</td><td>W3</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>ASCII 与 Unicode 字符编码</td><td>—</td><td>W3</td><td><a class="tag aie" href="#a5">只有 AIE 有 →</a></td></tr>
+  <tr><td>字符串字典序比较（'10' &lt; '9' 为什么成立）</td><td>—</td><td>W3</td><td><a class="tag aie" href="#a6">只有 AIE 有 →</a></td></tr>
+  <tr><td>浮点精度：0.1 + 0.2 != 0.3、IEEE-754 双精度</td><td>—</td><td>W3</td><td><a class="tag aie" href="#a7">只有 AIE 有 →</a></td></tr>
+  <tr><td>bool() 与 falsy / truthy 清单</td><td>—</td><td>W3</td><td><a class="tag aie" href="#a8">只有 AIE 有 →</a></td></tr>
+  <tr><td>if / if-else / if-elif-else 与缩进规则</td><td>T10</td><td>W3</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>and / or / not 与短路求值</td><td>T6</td><td>W3</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>try / except（含 else、finally）</td><td>T13</td><td>W3</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>while / for、break / continue、无限循环</td><td>T10</td><td>W3</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>循环套路：最大值 / 求和 / 计数 / 平均 / 过滤 / flag 搜索</td><td>T18</td><td>W3</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>求最小值要先置 None 再判断（经典丢分点）</td><td>—</td><td>W3</td><td><a class="tag aie" href="#a9">只有 AIE 有 →</a></td></tr>
+  <tr><td>身份运算符 is / is not（与 == 的区别）</td><td>T9</td><td>W3</td><td><span class="tag both">两边都考</span></td></tr>
+
+  <tr><td colspan="4" style="background:#f0f2f7;font-weight:600">四、函数与字符串 / 文件（AIE Week4）</td></tr>
+  <tr><td>def、形参实参、return、无 return 返回 None</td><td>T11</td><td>W4</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>默认参数、关键字参数、返回多个值（tuple packing）</td><td>T11</td><td>W4</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>作用域：local / global、global 关键字</td><td>T12</td><td>W4</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>字符串索引、越界、切片「含头不含尾」</td><td>T8</td><td>W4</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>find() / upper() / lower() / replace() / strip() / split()</td><td>T8</td><td>W4</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>lstrip() / rstrip()：只删一端</td><td>—</td><td>W4</td><td><a class="tag aie" href="#a10">只有 AIE 有 →</a></td></tr>
+  <tr><td>startswith()：判断是否以某串开头</td><td>—</td><td>W4</td><td><a class="tag aie" href="#a11">只有 AIE 有 →</a></td></tr>
+  <tr><td>文件：open('r'/'w')、逐行 for、read、write、换行符</td><td>T15</td><td>W4</td><td><span class="tag both">两边都考</span></td></tr>
+
+  <tr><td colspan="4" style="background:#f0f2f7;font-weight:600">五、列表 / 字典 / 元组（AIE Week5）</td></tr>
+  <tr><td>列表字面量、索引、可变性（vs 字符串不可变）</td><td>T9</td><td>W5</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>len() / range() / 两种遍历方式</td><td>T9 / T10</td><td>W5</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>+ 拼接、* 重复、切片、append()、in 判断</td><td>T9</td><td>W5</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>sort() vs sorted()、max / min / sum</td><td>T14</td><td>W5</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>字典字面量、键查找、KeyError</td><td>T14</td><td>W5</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>字典计数模式与 get(key, default)</td><td>T14（2022 Q3.2b）</td><td>W5</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>keys() / values() / items()、两个迭代变量遍历</td><td>T14</td><td>W5</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>按 value 排序：元组列表 + sorted(key=lambda)</td><td>T14</td><td>W5</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td>元组不可变、可比较、比列表更省内存</td><td>T9 / T14</td><td>W5</td><td><span class="tag both">两边都考</span></td></tr>
+</table>
+
+<h2 class="anchor" id="aie-only">只有 AIE1001 有的 10 块（本站真题里没出现过）</h2>
+
+<div class="card good">
+  <p style="margin:0">下面每一块都标了出处（Week 几、课件里的哪一节）。这些是 AIE 课件明确讲了、
+     但本站 2021–2023 真题聚合出的 18 个专题里查不到的内容 —— 两块一起复习时，这一节必须补。</p>
+</div>
+
+<div class="card" id="a1">
+  <h4 style="margin-top:0">A1 · 语言发展史：谁在什么年代造了哪门语言 <span class="src">AIE Week1</span></h4>
+  <table>
+    <tr><th style="width:90px">语言</th><th style="width:150px">作者</th><th style="width:90px">年代</th><th>一句话特征</th></tr>
+    <tr><td>C</td><td>Dennis Ritchie</td><td>1969–1973</td><td>贝尔实验室；介于汇编与高级语言之间，能直接操作内存，高级语言里执行效率最高</td></tr>
+    <tr><td>C++</td><td>Bjarne Stroustrup</td><td>1979 起</td><td>继承 C 的主要特性，加入面向对象、支持代码复用，仍平台相关</td></tr>
+    <tr><td>Java</td><td>James Gosling</td><td>1995</td><td>Sun 公司；平台无关，"write once, run anywhere"</td></tr>
+    <tr><td>Python</td><td>Guido van Rossum</td><td>1989 开发 / 1991 发布</td><td>开源、面向对象、库丰富、能接 C/C++/Java；2010 年年度语言</td></tr>
+  </table>
+  <p><b>怎么考</b>：选择题直接问「Python 是谁在哪一年发布的」「哪门语言平台无关」。记两张卡片就够：
+     <span class="mono">Python = Guido van Rossum = 1991</span>；<span class="mono">Java = Gosling = 1995 = WORA</span>。</p>
+</div>
+
+<div class="card" id="a2">
+  <h4 style="margin-top:0">A2 · 抽象层次：从机器语言一路到 Python <span class="src">AIE Week1</span></h4>
+  <p>课件给了两条抽象链，选择题爱考「越往上越怎样」：</p>
+  <pre class="mono">机器语言 → 汇编语言 → C → Python        （越低执行越快，越高写起来越快）
+硬件 → 操作系统 → 应用软件                 （OS 是最底层的程序，提供基本服务）
+二进制位 → 基本数据类型 → 数据结构</pre>
+  <p><b>结论</b>：越高级的语言 <b>开发效率越高、执行效率越低</b>，且<b>不能直接执行</b>，必须先翻译成低级语言。
+     这条和本站 T1 的「开发效率 vs 执行效率反向」是同一件事，只是 AIE 多给了这条链。</p>
+</div>
+
+<div class="card" id="a3">
+  <h4 style="margin-top:0">A3 · 常量：Python 里没有真常量，全大写只是约定 <span class="src">AIE Week2</span></h4>
+  <pre class="mono">PI = 3.14159        # 约定：全大写 = 提醒自己和别人别改
+PI = 3              # 语法上完全合法，运行时不会报错</pre>
+  <p><b>怎么考</b>：判断题「Python 可以用 const 声明常量」→ 错。
+     Python <b>没有 const / final 关键字</b>，靠命名约定（全大写）表达「这个值不该改」。</p>
+</div>
+
+<div class="card" id="a4">
+  <h4 style="margin-top:0">A4 · divmod()：一次拿到商和余数 <span class="src">AIE Week2</span></h4>
+  <pre class="mono">divmod(7, 3)      # (2, 1)     等价于 (7 // 3, 7 % 3)
+divmod(-7, 3)     # (-3, 2)    注意：-7 // 3 = -3，-7 % 3 = 2
+q, r = divmod(17, 5)   # q = 3, r = 2</pre>
+  <p><b>为什么值钱</b>：它把 <span class="mono">//</span> 和 <span class="mono">%</span> 的负数规则捆在一起考 ——
+     Python 的 <span class="mono">//</span> 是<b>向下取整</b>（往数轴左边靠），所以负数商往往比"直觉"小 1，
+     余数则始终与<b>除数同号</b>（除数为正时余数非负）。本站 T6 只讲了 // 与 %，没讲 divmod。</p>
+</div>
+
+<div class="card" id="a5">
+  <h4 style="margin-top:0">A5 · ASCII 与 Unicode：字符背后都是数字 <span class="src">AIE Week3</span></h4>
+  <table>
+    <tr><th style="width:80px">概念</th><th>要点</th></tr>
+    <tr><td>ASCII</td><td>美国信息交换标准代码，共 128 个字符；可打印部分是 <b>32–126</b>；只覆盖英文字母、数字和少量符号</td></tr>
+    <tr><td>Unicode</td><td>给全世界每个字符一个唯一编号（code point），跨语言跨平台的统一标准；<b>ASCII 是它的子集</b></td></tr>
+    <tr><td>常用码点</td><td><span class="mono">'A'</span>=65，<span class="mono">'a'</span>=97，<span class="mono">'0'</span>=48；大写整体排在小写前面</td></tr>
+    <tr><td>Python</td><td><span class="mono">ord('A') → 65</span>；<span class="mono">chr(65) → 'A'</span>；Python 3 的 str 就是 Unicode 字符串</td></tr>
+  </table>
+  <p><b>怎么考</b>：给 <span class="mono">ord()</span> / <span class="mono">chr()</span> 的结果填空，或问「ASCII 有多少个字符」（128）。</p>
+</div>
+
+<div class="card" id="a6">
+  <h4 style="margin-top:0">A6 · 字符串字典序比较 <span class="src">AIE Week3</span></h4>
+  <p>字符串比较是<b>逐字符比码点</b>，第一个不相同的字符直接决定结果；一个是另一个的前缀时，短的更小。</p>
+  <pre class="mono">'abc' &lt; 'abcd'   # True   前缀更短 → 更小
+'Z'   &lt; 'a'      # True   90 &lt; 97，大写整体排在小写前
+'10'  &lt; '9'      # True   先比 '1'(49) 和 '9'(57)，不是按数值比！</pre>
+  <p><b>丢分点</b>：数字字符串<b>不按数值大小</b>比较。要按数值比必须先 <span class="mono">int()</span> 转换。
+     这条本站 T8 没单列，但它是「字符串 + 比较运算符」混考时的隐形陷阱。</p>
+</div>
+
+<div class="card" id="a7">
+  <h4 style="margin-top:0">A7 · 浮点精度：0.1 + 0.2 为什么不等于 0.3 <span class="src">AIE Week3</span></h4>
+  <pre class="mono">0.1 + 0.2 == 0.3        # False
+0.1 + 0.2               # 0.30000000000000004
+0.1                     # 存进去其实是
+                        # 0.1000000000000000055511151231257827...</pre>
+  <ul style="margin-bottom:0">
+    <li>分母不是 2 的幂的有理数（如 0.1 = 1/10）<b>无法被精确表示</b>，只能近似。</li>
+    <li>Python 的 float 是 <b>IEEE-754 双精度 64 位</b>，只能精确存约 <b>15–17 位有效十进制数字</b>。</li>
+    <li>比较浮点不要写 <span class="mono">a == b</span>，要写 <span class="mono">abs(a - b) &lt; 1e-9</span>。</li>
+  </ul>
+</div>
+
+<div class="card" id="a8">
+  <h4 style="margin-top:0">A8 · bool() 与 falsy / truthy 清单 <span class="src">AIE Week3</span></h4>
+  <p>会判为 <b>False</b> 的就这几种，背下来：</p>
+  <pre class="mono">None          False
+0、0.0、0j    （任何数值类型的零）
+""            （空字符串）
+[]  {}  set()  range(0)      （空容器）</pre>
+  <p><b>其余一切都是 True</b>，包括这几个最容易上当的：</p>
+  <pre class="mono">bool('0')       # True   非空字符串
+bool('False')   # True   同理，非空字符串
+bool([0])       # True   列表里有一个元素，不是空列表
+bool(-1)        # True   非 0 数字都算 True</pre>
+  <p><b>怎么考</b>：<span class="mono">if x:</span> 到底进不进；或者问「下面哪个是 False」。
+     本站 T10 讲了 if 结构，但没列这份 falsy 清单。</p>
+</div>
+
+<div class="card" id="a9">
+  <h4 style="margin-top:0">A9 · 求最小值：不能像求最大值那样初始化 <span class="src">AIE Week3</span></h4>
+  <pre class="mono"># 求最大值：初始化成 0 勉强能用（全是正数时）
+largest = 0
+for n in data:
+    if n &gt; largest: largest = n
+
+# 求最小值：初始化成 0 就废了 —— 没有任何数会小于 0
+smallest = None                      # 正确写法 ①
+for n in data:
+    if smallest is None or n &lt; smallest:
+        smallest = n
+
+# 或者：拿第一个元素起步，从第二个开始比
+smallest = data[0]                   # 正确写法 ②
+for n in data[1:]:
+    if n &lt; smallest: smallest = n</pre>
+  <p><b>为什么单列</b>：课件专门拿这一页讲「这段程序有什么问题」——
+     把求最大值的模板照抄到求最小值上，是初学者最常见的一个 bug。本站 T18 讲 flag 和 trace，没讲这个。</p>
+</div>
+
+<div class="card" id="a10">
+  <h4 style="margin-top:0">A10 · lstrip() / rstrip()：只删一端的空白 <span class="src">AIE Week4</span></h4>
+  <pre class="mono">s = "  hi  "
+s.strip()     # "hi"      两端都删
+s.lstrip()    # "hi  "    只删左端（leading）
+s.rstrip()    # "  hi"    只删右端（trailing）
+
+"xxxy".strip("x")    # "y"   传参 = 指定要删的字符集合
+s.strip()            # 返回新字符串，s 本身没变</pre>
+  <p><b>记住</b>：这三个都不改原串（字符串不可变），返回的是<b>新字符串</b>。
+     本站 T8 的必背方法表里有 <span class="mono">strip()</span>，但没有 lstrip / rstrip。</p>
+</div>
+
+<div class="card" id="a11">
+  <h4 style="margin-top:0">A11 · startswith()：判断以什么开头 <span class="src">AIE Week4</span></h4>
+  <pre class="mono">line = "From professor.xman@uct.edu Sat Jan  5 09:14:16 2008"
+line.startswith("From")     # True
+
+# 对比：find() 返回下标，找不到返回 -1（不是 False，也不是报错）
+line.find("@")              # 21
+line.find("zzz")            # -1</pre>
+  <table>
+    <tr><th style="width:130px">方法</th><th style="width:110px">返回值</th><th>找不到时</th></tr>
+    <tr><td>startswith(x)</td><td>True / False</td><td>False，不报错</td></tr>
+    <tr><td>find(x)</td><td>下标（int）</td><td><b>-1</b>，不报错</td></tr>
+    <tr><td>index(x)</td><td>下标（int）</td><td><b>抛 ValueError</b></td></tr>
+  </table>
+  <p><b>配套习惯</b>：课件强调「用 find 找子串前先 <span class="mono">lower()</span>」，这样就不用管大小写。
+     本站 T8 有 find，但没出现 startswith。</p>
+</div>
+
+<h2 class="anchor" id="site-only">只有本站有的一块</h2>
+
+<div class="card tint">
+  <h4 style="margin-top:0">NRZI 编码（专题 T4）</h4>
+  <p style="margin-bottom:0">这是本站 18 个专题里唯一在 AIE1001 Week1–Week5 课件中<b>完全找不到</b>的内容。
+     AIE 的 Week1 只讲到「二进制、进制转换、信息单位」就结束了，没有讲任何编码方式（NRZI / 曼彻斯特等都没出现）。
+     所以：<b>只在 C1001 考，AIE 不考</b> —— 如果时间紧，这块可以只在本站刷一遍就过。
+     <a href="index.html#t4">→ 回到本站 T4 专题</a></p>
+</div>
+
+<h2 class="anchor" id="tips">两个一起复习时的建议</h2>
+
+<div class="card analysis">
+  <ol style="margin-bottom:0">
+    <li><b>先按本站的 18 个专题过一遍</b>：23 个知识块是重合的，本站每个专题都有真题 + 答案 + 解析 + 类型题，性价比最高。</li>
+    <li><b>再补这一页的 10 块</b>：尤其 A5（ASCII/Unicode）、A7（浮点精度）、A8（falsy 清单）—— 这三块是 AIE 课件花了整页讲、而本站真题里一次都没出现过的，属于"AIE 会考而 C1001 不考"的典型。</li>
+    <li><b>NRZI 只在 C1001 考</b>，反向同理，别把时间按错地方。</li>
+    <li><b>注意两边讲法差异</b>：本站偏"真题怎么挖坑"（争议题、逐行注释、答题模板），AIE 课件偏"概念为什么是这样"（抽象层次、IEEE-754 原理）。前者管得分，后者管不翻车。</li>
+  </ol>
+</div>
+
+<div class="card">
+  <p style="margin:0;font-size:13px;color:var(--ink3)">
+    对照口径说明：本站一侧依据 2021 / 2022 / 2023 三年真题聚合出的 18 个专题及其「专题分析」；
+    AIE1001 一侧依据 Lecture 1–5（Week1 计算机基础与数据表示、Week2 Python 基础、Week3 流程控制、
+    Week4 函数与字符串 / 文件、Week5 列表 / 字典 / 元组）的课件正文与课内练习。
+    「只有 AIE 有」= 该知识点在 AIE 课件中出现，但在本站全文中检索不到对应关键词。
+    <b>本站真题为 2021–2023 旧卷，两门课的实际范围请以本学期 syllabus 为准。</b>
+  </p>
+</div>
+
+
+</div>
+
+<!-- ===== 站点统计埋点 ===== -->
+<script>
+(function(){
+  var U = 'https://itkjrodrzenefmxsyrnx.supabase.co';
+  var A = 'sb_publishable_Tfq41bRCMvAVZYgYuEJe9g_RkrFKQZB';
+  var S = 'csc1001-mid';
+  var K = 'st_vid';
+  var vid = '';
+  try {
+    vid = localStorage.getItem(K) || '';
+    if (!vid) {
+      vid = (crypto && crypto.randomUUID)
+        ? crypto.randomUUID().replace(/-/g, '')
+        : 'v' + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+      localStorage.setItem(K, vid);
+    }
+  } catch (e) { vid = ''; }
+  if (!vid) return;
+
+  var P = 'st_dev';
+  function day8() {
+    var d = new Date(Date.now() + 8 * 3600000);
+    return d.getUTCFullYear() + '-' +
+           String(d.getUTCMonth() + 1).padStart(2, '0') + '-' +
+           String(d.getUTCDate()).padStart(2, '0');
+  }
+  function profile(day) {
+    var o = {};
+    try { o = JSON.parse(localStorage.getItem(P) || '{}'); } catch (e) {}
+    o.n = (o.n || 0) + 1;
+    o.s = o.s || {}; o.s[S] = (o.s[S] || 0) + 1;
+    o.d = o.d || []; if (o.d.indexOf(day) < 0) o.d.push(day); o.d.sort();
+    o.w = o.w || 0;
+    o.fd = o.fd || day;
+    try { localStorage.setItem(P, JSON.stringify(o)); } catch (e) {}
+    return o;
+  }
+  function post(body) {
+    try {
+      fetch(U + '/rest/v1/rpc/report', {
+        method: 'POST',
+        headers: { 'apikey': A, 'Authorization': 'Bearer ' + A,
+                   'Content-Type': 'application/json' },
+        body: JSON.stringify(body), keepalive: true
+      }).catch(function(){});
+    } catch (e) {}
+  }
+
+  var t0 = Date.now(), left = false;
+  var day = day8(), dev = profile(day);
+  post({ p_site: S, p_vid: vid, p_day: day, p_cnt: 1, p_dev: dev });
+
+  function leave() {
+    if (left) return; left = true;
+    var sec = Math.round((Date.now() - t0) / 1000);
+    if (sec < 0) sec = 0;
+    if (sec > 3600) sec = 3600;
+    dev.w = (dev.w || 0) + sec;
+    try { localStorage.setItem(P, JSON.stringify(dev)); } catch (e) {}
+    post({ p_site: S, p_vid: vid, p_day: day, p_cnt: 0, p_dev: dev, p_dwell: sec });
+  }
+  addEventListener('pagehide', leave);
+  addEventListener('beforeunload', leave);
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'hidden') leave();
+  });
+})();
+</script>
+</body>
+
+</html>
