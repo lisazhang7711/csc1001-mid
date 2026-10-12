@@ -4852,5 +4852,73 @@ renderFav();
 })();
 </script>
 <!-- ===== /意见反馈栏 ===== -->
+<!-- ===== 站点统计埋点 ===== -->
+<script>
+(function(){
+  var U = 'https://itkjrodrzenefmxsyrnx.supabase.co';
+  var A = 'sb_publishable_Tfq41bRCMvAVZYgYuEJe9g_RkrFKQZB';
+  var S = 'csc1001-mid';
+  var K = 'st_vid';
+  var vid = '';
+  try {
+    vid = localStorage.getItem(K) || '';
+    if (!vid) {
+      vid = (crypto && crypto.randomUUID)
+        ? crypto.randomUUID().replace(/-/g, '')
+        : 'v' + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+      localStorage.setItem(K, vid);
+    }
+  } catch (e) { vid = ''; }
+  if (!vid) return;
+
+  var P = 'st_dev';
+  function day8() {
+    var d = new Date(Date.now() + 8 * 3600000);
+    return d.getUTCFullYear() + '-' +
+           String(d.getUTCMonth() + 1).padStart(2, '0') + '-' +
+           String(d.getUTCDate()).padStart(2, '0');
+  }
+  function profile(day) {
+    var o = {};
+    try { o = JSON.parse(localStorage.getItem(P) || '{}'); } catch (e) {}
+    o.n = (o.n || 0) + 1;
+    o.s = o.s || {}; o.s[S] = (o.s[S] || 0) + 1;
+    o.d = o.d || []; if (o.d.indexOf(day) < 0) o.d.push(day); o.d.sort();
+    o.w = o.w || 0;
+    o.fd = o.fd || day;
+    try { localStorage.setItem(P, JSON.stringify(o)); } catch (e) {}
+    return o;
+  }
+  function post(body) {
+    try {
+      fetch(U + '/rest/v1/rpc/report', {
+        method: 'POST',
+        headers: { 'apikey': A, 'Authorization': 'Bearer ' + A,
+                   'Content-Type': 'application/json' },
+        body: JSON.stringify(body), keepalive: true
+      }).catch(function(){});
+    } catch (e) {}
+  }
+
+  var t0 = Date.now(), left = false;
+  var day = day8(), dev = profile(day);
+  post({ p_site: S, p_vid: vid, p_day: day, p_cnt: 1, p_dev: dev });
+
+  function leave() {
+    if (left) return; left = true;
+    var sec = Math.round((Date.now() - t0) / 1000);
+    if (sec < 0) sec = 0;
+    if (sec > 3600) sec = 3600;
+    dev.w = (dev.w || 0) + sec;
+    try { localStorage.setItem(P, JSON.stringify(dev)); } catch (e) {}
+    post({ p_site: S, p_vid: vid, p_day: day, p_cnt: 0, p_dev: dev, p_dwell: sec });
+  }
+  addEventListener('pagehide', leave);
+  addEventListener('beforeunload', leave);
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'hidden') leave();
+  });
+})();
+</script>
 </body>
 </html>
