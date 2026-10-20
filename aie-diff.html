@@ -408,14 +408,14 @@ pre{background:var(--code);border:1px solid var(--line);border-radius:8px;
     <span class="chip">20 块只有 AIE 有</span>
     <span class="chip">1 块只有本站有</span>
     <span class="chip">AIE 范围：Week1–Week6</span>
-    <span class="chip" style="background:var(--amber-soft);border-color:var(--amber-line);color:#8a5a08">Week6 递归：本站 0 处、全部要补</span>
+    <span class="chip" style="background:var(--amber-soft);border-color:var(--amber-line);color:#8a5a08">AIE1001 Week6 递归：本站 0 处、全部要补</span>
   </div>
 </div>
 
 <div class="bar">
   <a href="index.html" style="text-decoration:none"><button>← 返回复习站</button></a>
   <a href="#aie-only" style="text-decoration:none"><button>直接看 AIE 独有内容</button></a>
-  <a href="#wk6" style="text-decoration:none"><button>跳到 Week6 递归</button></a>
+  <a href="#wk6" style="text-decoration:none"><button>跳到 AIE1001 Week6 递归</button></a>
   <span class="hint">对照口径：AIE1001 Lecture 1–6 的课件正文 + 课内练习题；本站为 2021–2023 三年真题聚合出的 18 个专题。</span>
 </div>
 
@@ -502,7 +502,7 @@ pre{background:var(--code);border:1px solid var(--line);border-radius:8px;
   <tr><td>keys() / values() / items()、两个迭代变量遍历</td><td>T14</td><td>W5</td><td><span class="tag both">两边都考</span></td></tr>
   <tr><td>按 value 排序：元组列表 + sorted(key=lambda)</td><td>T14</td><td>W5</td><td><span class="tag both">两边都考</span></td></tr>
   <tr><td>元组不可变、可比较、比列表更省内存</td><td>T9 / T14</td><td>W5</td><td><span class="tag both">两边都考</span></td></tr>
-  <tr><td colspan="4" style="background:#f0f2f7;font-weight:600">六、递归（AIE Week6）</td></tr>
+  <tr><td colspan="4" style="background:#f0f2f7;font-weight:600">六、递归（AIE1001 Week6）</td></tr>
   <tr><td>递归的定义：函数调用自身；两要素 base case + recursive case</td><td>—</td><td>W6</td><td><a class="tag aie" href="#a12">只有 AIE 有 →</a></td></tr>
   <tr><td>阶乘 n! = n·(n−1)! 的递归写法 + activation record / frame</td><td>—</td><td>W6</td><td><a class="tag aie" href="#a13">只有 AIE 有 →</a></td></tr>
   <tr><td>递归树：fact(3) 的展开与回推</td><td>—</td><td>W6</td><td><a class="tag aie" href="#a14">只有 AIE 有 →</a></td></tr>
@@ -519,7 +519,7 @@ pre{background:var(--code);border:1px solid var(--line);border-radius:8px;
 <div class="card good">
   <p style="margin:0">下面每一块都标了出处（Week 几、课件里的哪一页）。这些是 AIE 课件明确讲了、
      但本站 2021–2023 真题聚合出的 18 个专题里查不到的内容 —— 两块一起复习时，这一节必须补。
-     <b>A12–A20 是新增的 Week6 递归部分</b>：本站全文里「递归 / recursion / 二分查找」出现 0 次，
+     <b>A12–A20 是新增的 AIE1001 Week6 递归部分</b>：本站全文里「递归 / recursion / 二分查找」出现 0 次，
      这 9 块是 AIE 期中会考而本站完全帮不上忙的地方，往下翻就能看到。</p>
 </div>
 
@@ -667,10 +667,10 @@ line.find("zzz")            # -1</pre>
      本站 T8 有 find，但没出现 startswith。</p>
 </div>
 
-<h3 class="anchor" id="wk6" style="margin-top:30px;padding-top:16px;border-top:2px dashed var(--brand-line)">以下 9 块来自 Week6（递归）—— 本站 18 个专题里<b>一处都没出现过</b></h3>
+<h3 class="anchor" id="wk6" style="margin-top:30px;padding-top:16px;border-top:2px dashed var(--brand-line)">以下 9 块来自 AIE1001 Week6（递归）—— 本站 18 个专题里<b>一处都没出现过</b></h3>
 
 <div class="card" id="a12">
-  <h4 style="margin-top:0">A12 · 递归是什么：一个函数调用它自己 <span class="src">AIE Week6 · p7 / p9</span></h4>
+  <h4 style="margin-top:0">A12 · 递归是什么：一个函数调用它自己 <span class="src">AIE1001 Week6 · p7 / p9</span></h4>
   <p>课件的定义（p7）：<b>递归</b>是一种技术 —— 一个函数在<b>执行过程中对自己发起一次或多次调用</b>。
      它适合解决那种「自然地由重复结构组成、可以用自身来定义」的问题。</p>
   <p>课件开的场（p3–5）是排队问题：你在队伍里看不见队首，想知道自己是第几个。</p>
@@ -695,7 +695,7 @@ line.find("zzz")            # -1</pre>
 </div>
 
 <div class="card" id="a13">
-  <h4 style="margin-top:0">A13 · 阶乘：递归的模板题，以及 Python 背后做了什么 <span class="src">AIE Week6 · p10 / p12–13 / p15</span></h4>
+  <h4 style="margin-top:0">A13 · 阶乘：递归的模板题，以及 Python 背后做了什么 <span class="src">AIE1001 Week6 · p10 / p12–13 / p15</span></h4>
   <h4>标准写法（课件 p15 原版）</h4>
   <pre class="mono">def fact(n):
     """Calculates n!"""
@@ -734,7 +734,7 @@ print(fact(3))</pre>
 </div>
 
 <div class="card" id="a14">
-  <h4 style="margin-top:0">A14 · 递归树：把 fact(3) 的展开和回推画出来 <span class="src">AIE Week6 · p14–15</span></h4>
+  <h4 style="margin-top:0">A14 · 递归树：把 fact(3) 的展开和回推画出来 <span class="src">AIE1001 Week6 · p14–15</span></h4>
   <p>课件 p15 给了 <span class="mono">fact(3)</span> 的递归树。摊平成表格更好读：</p>
   <table>
     <tr><th style="width:110px">这一次调用</th><th style="width:200px">它在等什么</th><th>算出来的值</th></tr>
@@ -752,7 +752,7 @@ print(fact(3))</pre>
 </div>
 
 <div class="card" id="a15">
-  <h4 style="margin-top:0">A15 · 二分查找 binary search：Week6 里最容易出大题的一个 <span class="src">AIE Week6 · p16–24</span></h4>
+  <h4 style="margin-top:0">A15 · 二分查找 binary search：AIE1001 Week6 里最容易出大题的一个 <span class="src">AIE1001 Week6 · p16–24</span></h4>
   <h4>前提：序列必须「已排序且可按下标访问」</h4>
   <p>p18 原话：<span class="mono">When the sequence is sorted and indexable</span>。
      不满足时只能<b>顺序查找 sequential search</b>：用循环挨个比对，直到找到或穷尽（p16）。
@@ -794,7 +794,7 @@ low &gt; high            → 区间空了，没找到             ← 这才是�
 </div>
 
 <div class="card" id="a16">
-  <h4 style="margin-top:0">A16 · 线性递归与快速幂 myPower <span class="src">AIE Week6 · p25–30</span></h4>
+  <h4 style="margin-top:0">A16 · 线性递归与快速幂 myPower <span class="src">AIE1001 Week6 · p25–30</span></h4>
   <h4>线性递归的定义（p29–30）</h4>
   <p>函数体每执行一次，<b>至多</b>发起一次新的递归调用 → <b>linear recursion（线性递归）</b>。
      课件点名的例子：阶乘、二分查找、求最小值。</p>
@@ -819,7 +819,7 @@ low &gt; high            → 区间空了，没找到             ← 这才是�
 </div>
 
 <div class="card" id="a17">
-  <h4 style="margin-top:0">A17 · 递归求列表和 linearSum <span class="src">AIE Week6 · p31–32</span></h4>
+  <h4 style="margin-top:0">A17 · 递归求列表和 linearSum <span class="src">AIE1001 Week6 · p31–32</span></h4>
   <pre class="mono">def linearSum(L,n):
     if n==0:
         return 0                        # base case：空列表和为 0
@@ -836,7 +836,7 @@ print('The sum is:', linearSum(L,len(L)))   # The sum is: 108</pre>
 </div>
 
 <div class="card" id="a18">
-  <h4 style="margin-top:0">A18 · 多重递归与英式尺子 <span class="src">AIE Week6 · p35–39</span></h4>
+  <h4 style="margin-top:0">A18 · 多重递归与英式尺子 <span class="src">AIE1001 Week6 · p35–39</span></h4>
   <h4>多重递归（p35）</h4>
   <p>函数在<b>一次执行中发起两次或两次以上</b>递归调用 → <b>multiple recursion（多重递归）</b>。课件给的头号例子是画英式尺子。</p>
   <h4>英式尺子的递归结构（p37，背下这句就能写出代码）</h4>
@@ -878,7 +878,7 @@ def draw_ruler(numInch, majorLen):
 </div>
 
 <div class="card" id="a19">
-  <h4 style="margin-top:0">A19 · binarySum：把列表折成两半再求和 <span class="src">AIE Week6 · p40–43</span></h4>
+  <h4 style="margin-top:0">A19 · binarySum：把列表折成两半再求和 <span class="src">AIE1001 Week6 · p40–43</span></h4>
   <pre class="mono">def binarySum(L, start, stop):
     if start&gt;=stop:                     # base case ①：空区间
         return 0
@@ -903,7 +903,7 @@ print(binarySum(L,0,len(L)))            # 10</pre>
 </div>
 
 <div class="card" id="a20">
-  <h4 style="margin-top:0">A20 · 斐波那契递归 + f-string <span class="src">AIE Week6 · p44–45</span></h4>
+  <h4 style="margin-top:0">A20 · 斐波那契递归 + f-string <span class="src">AIE1001 Week6 · p44–45</span></h4>
   <h4>斐波那契（p44）</h4>
   <p>序列 <span class="mono">0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, …</span>：
      从第 0、1 项起，<b>每一项都是前两项之和</b>。</p>
@@ -940,7 +940,7 @@ print(f'1 + 1 = {1+1}')                 # 1 + 1 = 2</pre>
   <ol style="margin-bottom:0">
     <li><b>先按本站的 18 个专题过一遍</b>：23 个知识块是重合的，本站每个专题都有真题 + 答案 + 解析 + 类型题，性价比最高。</li>
     <li><b>再补这一页的 20 块</b>：Week1–5 部分优先看 A5（ASCII/Unicode）、A7（浮点精度）、A8（falsy 清单）—— 这三块是 AIE 课件花了整页讲、而本站真题里一次都没出现过的。</li>
-    <li><b>Week6 递归（A12–A20）单独留时间</b>：本站 18 个专题里「递归 / recursion / 二分查找」出现 <b>0 次</b>，这一块只能在本页补。建议顺序 A12（两要素）→ A13（阶乘 / 调用栈）→ A14（递归树）→ A15（二分查找，最可能出大题）；A16 的「快速幂为什么仍算线性递归」是典型送分陷阱题。</li>
+    <li><b>AIE1001 Week6 递归（A12–A20）单独留时间</b>：本站 18 个专题里「递归 / recursion / 二分查找」出现 <b>0 次</b>，这一块只能在本页补。建议顺序 A12（两要素）→ A13（阶乘 / 调用栈）→ A14（递归树）→ A15（二分查找，最可能出大题）；A16 的「快速幂为什么仍算线性递归」是典型送分陷阱题。</li>
     <li><b>NRZI 只在 CSC1001 考</b>，反向同理，别把时间按错地方。</li>
     <li><b>注意两边讲法差异</b>：本站偏"真题怎么挖坑"（争议题、逐行注释、答题模板），AIE 课件偏"概念为什么是这样"（抽象层次、IEEE-754 原理）。前者管得分，后者管不翻车。</li>
   </ol>
@@ -950,8 +950,8 @@ print(f'1 + 1 = {1+1}')                 # 1 + 1 = 2</pre>
   <p style="margin:0;font-size:13px;color:var(--ink3)">
     对照口径说明：本站一侧依据 2021 / 2022 / 2023 三年真题聚合出的 18 个专题及其「专题分析」；
     AIE1001 一侧依据 Lecture 1–6（Week1 计算机基础与数据表示、Week2 Python 基础、Week3 流程控制、
-    Week4 函数与字符串 / 文件、Week5 列表 / 字典 / 元组、<b>Week6 递归</b>）的课件正文、课内练习与配套 code.py。
-    Week6 部分的代码均取自课件附件 <span class="mono">code.py</span>，所有输出与数值均在本机 Python 3.13 实跑核对过。
+    Week4 函数与字符串 / 文件、Week5 列表 / 字典 / 元组、<b>AIE1001 Week6 递归</b>）的课件正文、课内练习与配套 code.py。
+    AIE1001 Week6 部分的代码均取自课件附件 <span class="mono">code.py</span>，所有输出与数值均在本机 Python 3.13 实跑核对过。
     「只有 AIE 有」= 该知识点在 AIE 课件中出现，但在本站全文中检索不到对应关键词。
     <b>本站真题为 2021–2023 旧卷，两门课的实际范围请以本学期 syllabus 为准。</b>
   </p>
