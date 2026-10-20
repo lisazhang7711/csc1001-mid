@@ -8,7 +8,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AIE1001 × CSC1001 考点差异对照 · Week1–5</title>
+<title>AIE1001 × CSC1001 考点差异对照 · Week1–6（含递归）</title>
 
 <style>
 
@@ -400,21 +400,23 @@ pre{background:var(--code);border:1px solid var(--line);border-radius:8px;
 
 <div class="hero">
   <h1>AIE1001 × CSC1001 · 考点差异对照</h1>
-  <p>左边是 AIE1001 的 Week1–Week5 课件（Lecture 1–5，Prof. Junjie Hu），右边是本复习站的 18 个专题。
+  <p>左边是 AIE1001 的 Week1–Week6 课件（Lecture 1–6，Prof. Junjie Hu），右边是本复习站的 18 个专题。
      点琥珀色的「只有 AIE 有」任意一行，会跳到本页下方的对应内容卡片 —— 那是本站没有、但 AIE 会考的东西。</p>
   <div class="chips">
-    <span class="chip">对照 34 个知识块</span>
-    <span class="chip">23 块两边都考</span>
-    <span class="chip">11 块只有 AIE 有</span>
+    <span class="chip">对照 64 个知识块</span>
+    <span class="chip">43 块两边都考</span>
+    <span class="chip">20 块只有 AIE 有</span>
     <span class="chip">1 块只有本站有</span>
-    <span class="chip">AIE 范围：Week1–Week5</span>
+    <span class="chip">AIE 范围：Week1–Week6</span>
+    <span class="chip" style="background:var(--amber-soft);border-color:var(--amber-line);color:#8a5a08">Week6 递归：本站 0 处、全部要补</span>
   </div>
 </div>
 
 <div class="bar">
   <a href="index.html" style="text-decoration:none"><button>← 返回复习站</button></a>
   <a href="#aie-only" style="text-decoration:none"><button>直接看 AIE 独有内容</button></a>
-  <span class="hint">对照口径：AIE1001 Lecture 1–5 的课件正文 + 课内练习题；本站为 2021–2023 三年真题聚合出的 18 个专题。</span>
+  <a href="#wk6" style="text-decoration:none"><button>跳到 Week6 递归</button></a>
+  <span class="hint">对照口径：AIE1001 Lecture 1–6 的课件正文 + 课内练习题；本站为 2021–2023 三年真题聚合出的 18 个专题。</span>
 </div>
 
 <div class="card warn">
@@ -422,11 +424,11 @@ pre{background:var(--code);border:1px solid var(--line);border-radius:8px;
   <p style="margin-bottom:0">
     <b>两边都考</b>（绿）：复习站已有专题，直接看本站就够，AIE 侧只是讲法不同。<br>
     <b>只有 AIE 有</b>（琥珀）：本站的真题里没出现过、但 AIE 课件明确讲了 —— <b>点这一行会跳到本页下方的讲解卡片</b>。<br>
-    <b>只有本站有</b>（蓝）：AIE Week1–5 课件里没有，只在 CSC1001 考，别把时间花错地方。
+    <b>只有本站有</b>（蓝）：AIE Week1–6 课件里没有，只在 CSC1001 考，别把时间花错地方。
   </p>
 </div>
 
-<h2 class="anchor" id="matrix">对照表 · 34 个知识块</h2>
+<h2 class="anchor" id="matrix">对照表 · 64 个知识块</h2>
 
 <table>
   <tr>
@@ -500,13 +502,25 @@ pre{background:var(--code);border:1px solid var(--line);border-radius:8px;
   <tr><td>keys() / values() / items()、两个迭代变量遍历</td><td>T14</td><td>W5</td><td><span class="tag both">两边都考</span></td></tr>
   <tr><td>按 value 排序：元组列表 + sorted(key=lambda)</td><td>T14</td><td>W5</td><td><span class="tag both">两边都考</span></td></tr>
   <tr><td>元组不可变、可比较、比列表更省内存</td><td>T9 / T14</td><td>W5</td><td><span class="tag both">两边都考</span></td></tr>
+  <tr><td colspan="4" style="background:#f0f2f7;font-weight:600">六、递归（AIE Week6）</td></tr>
+  <tr><td>递归的定义：函数调用自身；两要素 base case + recursive case</td><td>—</td><td>W6</td><td><a class="tag aie" href="#a12">只有 AIE 有 →</a></td></tr>
+  <tr><td>阶乘 n! = n·(n−1)! 的递归写法 + activation record / frame</td><td>—</td><td>W6</td><td><a class="tag aie" href="#a13">只有 AIE 有 →</a></td></tr>
+  <tr><td>递归树：fact(3) 的展开与回推</td><td>—</td><td>W6</td><td><a class="tag aie" href="#a14">只有 AIE 有 →</a></td></tr>
+  <tr><td>二分查找：low / high / mid 三分支、low &gt; high 终止</td><td>—</td><td>W6</td><td><a class="tag aie" href="#a15">只有 AIE 有 →</a></td></tr>
+  <tr><td>线性递归（至多一次递归调用）与快速幂 myPower</td><td>—</td><td>W6</td><td><a class="tag aie" href="#a16">只有 AIE 有 →</a></td></tr>
+  <tr><td>递归求列表和 linearSum(L, n)</td><td>—</td><td>W6</td><td><a class="tag aie" href="#a17">只有 AIE 有 →</a></td></tr>
+  <tr><td>多重递归：英式尺子 draw_interval / draw_ruler</td><td>—</td><td>W6</td><td><a class="tag aie" href="#a18">只有 AIE 有 →</a></td></tr>
+  <tr><td>binarySum：折半求和（函数体里两次递归调用）</td><td>—</td><td>W6</td><td><a class="tag aie" href="#a19">只有 AIE 有 →</a></td></tr>
+  <tr><td>斐波那契递归 + f-string 格式化输出</td><td>—</td><td>W6</td><td><a class="tag aie" href="#a20">只有 AIE 有 →</a></td></tr>
 </table>
 
-<h2 class="anchor" id="aie-only">只有 AIE1001 有的 11 块（本站真题里没出现过）</h2>
+<h2 class="anchor" id="aie-only">只有 AIE1001 有的 20 块（本站真题里没出现过）</h2>
 
 <div class="card good">
-  <p style="margin:0">下面每一块都标了出处（Week 几、课件里的哪一节）。这些是 AIE 课件明确讲了、
-     但本站 2021–2023 真题聚合出的 18 个专题里查不到的内容 —— 两块一起复习时，这一节必须补。</p>
+  <p style="margin:0">下面每一块都标了出处（Week 几、课件里的哪一页）。这些是 AIE 课件明确讲了、
+     但本站 2021–2023 真题聚合出的 18 个专题里查不到的内容 —— 两块一起复习时，这一节必须补。
+     <b>A12–A20 是新增的 Week6 递归部分</b>：本站全文里「递归 / recursion / 二分查找」出现 0 次，
+     这 9 块是 AIE 期中会考而本站完全帮不上忙的地方，往下翻就能看到。</p>
 </div>
 
 <div class="card" id="a1">
@@ -653,11 +667,268 @@ line.find("zzz")            # -1</pre>
      本站 T8 有 find，但没出现 startswith。</p>
 </div>
 
+<h3 class="anchor" id="wk6" style="margin-top:30px;padding-top:16px;border-top:2px dashed var(--brand-line)">以下 9 块来自 Week6（递归）—— 本站 18 个专题里<b>一处都没出现过</b></h3>
+
+<div class="card" id="a12">
+  <h4 style="margin-top:0">A12 · 递归是什么：一个函数调用它自己 <span class="src">AIE Week6 · p7 / p9</span></h4>
+  <p>课件的定义（p7）：<b>递归</b>是一种技术 —— 一个函数在<b>执行过程中对自己发起一次或多次调用</b>。
+     它适合解决那种「自然地由重复结构组成、可以用自身来定义」的问题。</p>
+  <p>课件开的场（p3–5）是排队问题：你在队伍里看不见队首，想知道自己是第几个。</p>
+  <pre class="mono">迭代做法：派个人走到队首，一个一个数回来      → 一次遍历
+递归做法：问前面那个人「你是第几个？」         → 他再去问他前面那个人
+          前面的人回来说 7，你就知道自己是 8    → 答案一路往回传</pre>
+  <h4>递归定义必须包含两部分（p9，这段话几乎就是标准答案）</h4>
+  <table>
+    <tr><th style="width:150px">要素</th><th>是什么</th><th>少了它会怎样</th></tr>
+    <tr><td><b>base case</b><br>基线情况</td><td>最简情形，答案已知，<b>不再发起任何函数调用</b></td><td>函数无限调用自己 → <span class="mono">RecursionError</span></td></tr>
+    <tr><td><b>recursive case</b><br>递归情况</td><td>把问题<b>缩小</b>成规模更小的同类问题，用<b>同一个函数</b>去解，并朝 base case 靠近</td><td>只是普通调用，不构成递归</td></tr>
+  </table>
+  <p>通用骨架 —— 写任何递归都从这两格开始填：</p>
+  <pre class="mono">def f(n):
+    if &lt;到达最简情形&gt;:            # base case：直接给答案
+        return &lt;已知答案&gt;
+    else:                        # recursive case：把 n 缩小
+        return &lt;组合&gt;(f(&lt;更小的 n&gt;))</pre>
+  <p style="margin-bottom:0"><b>怎么考</b>：① 挑错题 —— 给一段递归代码问「缺了什么」，答案是 base case；
+     ② 问「没有 base case 会怎样」，答案是无限递归直到 Python 抛
+     <span class="mono">RecursionError: maximum recursion depth exceeded</span>（实测默认上限 <span class="mono">sys.getrecursionlimit() = 1000</span>）。</p>
+</div>
+
+<div class="card" id="a13">
+  <h4 style="margin-top:0">A13 · 阶乘：递归的模板题，以及 Python 背后做了什么 <span class="src">AIE Week6 · p10 / p12–13 / p15</span></h4>
+  <h4>标准写法（课件 p15 原版）</h4>
+  <pre class="mono">def fact(n):
+    """Calculates n!"""
+    if n == 0:
+        return 1
+    else:
+        return n * fact(n-1)</pre>
+  <p>递归式来自 p10：<span class="mono">5! = 5 · (4 · 3 · 2 · 1) = 5 · 4!</span>，一般地 <span class="mono">n! = n · (n−1)!</span>。
+     所以 base case 是 <span class="mono">n == 0</span> 返回 1（<span class="mono">0! = 1</span>），recursive case 是 <span class="mono">n * fact(n-1)</span>。</p>
+  <h4>带追踪的版本（课件 code.py，可自己跑）</h4>
+  <pre class="mono">def fact(n):
+    if n == 0:
+        print('0! is 1')
+        return 1
+    else:
+        print(n, ' times ', n-1, '!')
+        return n*fact(n-1)
+
+print(fact(3))</pre>
+  <p>实跑输出（先一路<b>下去</b>到 base case，再一路<b>回来</b>算）：</p>
+  <pre class="mono">3  times  2 !
+2  times  1 !
+1  times  0 !
+0! is 1
+6</pre>
+  <p>注意顺序：<b>print 是先纵深、后返回</b>。前 3 行是往下钻的时候打的，最后才拿到结果 6。</p>
+  <h4>Python 怎么实现递归（p12–13，概念题高频区）</h4>
+  <ul>
+    <li>每次调用函数（递归也好、普通也好），Python 都在内存里建一个 <b>activation record（活动记录）</b>，也叫 <b>frame（帧）</b>；它存着这次调用的<b>参数</b>和<b>局部变量</b>。</li>
+    <li>函数 A 调用函数 B 时，Python 把 A <b>暂停</b>，并在 A 的 frame 里记下「B 结束后从代码的哪一行继续」。</li>
+    <li>后调用的先结束（<b>last called, first to finish</b>）—— 这就是栈。</li>
+    <li>所以 <b>递归是嵌套函数调用的一个特例</b>（p13 原话）：只不过被调用的恰好是它自己。</li>
+  </ul>
+  <p style="margin-bottom:0"><b>代价</b>：<span class="mono">fact(n)</span> 会同时挂 <span class="mono">n+1</span> 个 frame，
+     所以递归深度别超过 1000，否则抛 <span class="mono">RecursionError</span>。</p>
+</div>
+
+<div class="card" id="a14">
+  <h4 style="margin-top:0">A14 · 递归树：把 fact(3) 的展开和回推画出来 <span class="src">AIE Week6 · p14–15</span></h4>
+  <p>课件 p15 给了 <span class="mono">fact(3)</span> 的递归树。摊平成表格更好读：</p>
+  <table>
+    <tr><th style="width:110px">这一次调用</th><th style="width:200px">它在等什么</th><th>算出来的值</th></tr>
+    <tr><td>fact(3)</td><td>3 × fact(2)</td><td><b>6</b></td></tr>
+    <tr><td>fact(2)</td><td>2 × fact(1)</td><td>2</td></tr>
+    <tr><td>fact(1)</td><td>1 × fact(0)</td><td>1</td></tr>
+    <tr><td>fact(0)</td><td><b>base case，不再调用</b></td><td>1</td></tr>
+  </table>
+  <pre class="mono">往下钻：  fact(3) → fact(2) → fact(1) → fact(0)     ← 到这里停
+往回算：  1 → 1×1=1 → 2×1=2 → 3×2=6               ← 逐层交回上层</pre>
+  <p style="margin-bottom:0"><b>考点换算</b>：
+     ① <span class="mono">fact(3)</span> 一共发起 <b>3 次</b>递归调用，加上最初那次共 4 个 frame；
+     ② 这棵树是一条<b>链</b>（每个节点只有一个孩子），所以它是 A16 要讲的<b>线性递归</b>；
+     ③ <span class="mono">fact(n)</span> 的递归树有 <b>n+1</b> 层。</p>
+</div>
+
+<div class="card" id="a15">
+  <h4 style="margin-top:0">A15 · 二分查找 binary search：Week6 里最容易出大题的一个 <span class="src">AIE Week6 · p16–24</span></h4>
+  <h4>前提：序列必须「已排序且可按下标访问」</h4>
+  <p>p18 原话：<span class="mono">When the sequence is sorted and indexable</span>。
+     不满足时只能<b>顺序查找 sequential search</b>：用循环挨个比对，直到找到或穷尽（p16）。
+     顺序查找 <b>O(n)</b>，二分查找 <b>O(log n)</b>。</p>
+  <h4>术语（p19，这几个词会原样出现在题目里）</h4>
+  <table>
+    <tr><th style="width:120px">词</th><th>含义</th></tr>
+    <tr><td>candidate（候选）</td><td>当前阶段还<b>不能排除</b>匹配目标的元素</td></tr>
+    <tr><td>low / high</td><td>候选区间的下标两端，初始 <span class="mono">low = 0</span>、<span class="mono">high = n−1</span></td></tr>
+    <tr><td>mid</td><td>中位数下标，<span class="mono">mid = (low+high)//2</span></td></tr>
+  </table>
+  <h4>三个分支（p20，背下来就能写）</h4>
+  <pre class="mono">target == data[mid]   → 找到了，结束
+target &lt;  data[mid]   → 递归区间 [low, mid-1]        （左半）
+target &gt;  data[mid]   → 递归区间 [mid+1, high]       （右半）
+low &gt; high            → 区间空了，没找到             ← 这才是终止条件</pre>
+  <h4>课件 code.py 原版</h4>
+  <pre class="mono">def binarySearch(data, target, low, high):
+    if low &gt; high:
+        return False                    # base case ②：区间空了
+    else:
+        mid = (low+high) // 2
+        if target == data[mid]:
+            return True                 # base case ①：命中
+        elif target &lt; data[mid]:
+            return binarySearch(data, target, low, mid-1)
+        else:
+            return binarySearch(data, target, mid+1, high)</pre>
+  <h4>实跑（课件给的数组 <span class="mono">[1, 3, 5, 6, 16, 78]</span>）</h4>
+  <table>
+    <tr><th style="width:70px">目标</th><th style="width:110px">第 1 步</th><th style="width:110px">第 2 步</th><th style="width:110px">第 3 步</th><th>结果</th></tr>
+    <tr><td>16</td><td>low0 high5<br>mid2 → 5</td><td>low3 high5<br>mid4 → 16</td><td>—</td><td><b>True</b>（2 步命中，位置 4）</td></tr>
+    <tr><td>3</td><td>low0 high5<br>mid2 → 5</td><td>low0 high1<br>mid0 → 1</td><td>low1 high1<br>mid1 → 3</td><td><b>True</b>（3 步，位置 1）</td></tr>
+    <tr><td>4</td><td>low0 high5<br>mid2 → 5</td><td>low0 high1<br>mid0 → 1</td><td>low1 high1<br>mid1 → 3</td><td>再进一层后 <b>low2 &gt; high1</b><br>→ <b>False</b></td></tr>
+  </table>
+  <p style="margin-bottom:0"><b>两个必记的丢分点</b>：
+     ① 终止条件写 <span class="mono">low &gt; high</span>，不是 <span class="mono">low == high</span>（写成后者会漏掉最后一个元素）；
+     ② 递归右半是 <span class="mono">mid+1</span>、左半是 <span class="mono">mid-1</span>，<b>都要跳过 mid 本身</b>，否则目标不存在时会卡死。</p>
+</div>
+
+<div class="card" id="a16">
+  <h4 style="margin-top:0">A16 · 线性递归与快速幂 myPower <span class="src">AIE Week6 · p25–30</span></h4>
+  <h4>线性递归的定义（p29–30）</h4>
+  <p>函数体每执行一次，<b>至多</b>发起一次新的递归调用 → <b>linear recursion（线性递归）</b>。
+     课件点名的例子：阶乘、二分查找、求最小值。</p>
+  <h4>快速幂 myPower（p25–28 + code.py）</h4>
+  <pre class="mono">def myPower(x,n):
+    if n==0:
+        return 1                        # base case
+    else:
+        partial = myPower(x,n//2)       # 只递归一次 → 仍是线性递归
+        result = partial*partial
+        if n%2==1:                      # n 是奇数时补乘一个 x
+            result = result*x
+        return result</pre>
+  <p>思路：<span class="mono">xⁿ = (x^(n//2))²</span>，n 为奇数时再乘一个 x。
+     实测 <span class="mono">myPower(2,10) = 1024</span>，递归链是
+     <span class="mono">10 → 5 → 2 → 1 → 0</span>，<b>深度 5 层而不是 10 层</b>。</p>
+  <p><b>易错点（A16 最值钱的一条）</b>：它里面用了 <span class="mono">n//2</span>，看着像「二分」，
+     但函数体<b>只调用了自己一次</b>，所以按 p29 的分类它<b>仍然是线性递归</b>，不是多重递归。
+     分类只看<b>函数体里有几次递归调用</b>，跟参数怎么变无关。</p>
+  <p style="margin-bottom:0">对比朴素写法 <span class="mono">x*x*x*…*x</span> 要乘 n 次（<b>O(n)</b>），
+     myPower 是 <b>O(log n)</b> —— 课件把「a better recursive definition」单独列了一页（p27）就是这个道理。</p>
+</div>
+
+<div class="card" id="a17">
+  <h4 style="margin-top:0">A17 · 递归求列表和 linearSum <span class="src">AIE Week6 · p31–32</span></h4>
+  <pre class="mono">def linearSum(L,n):
+    if n==0:
+        return 0                        # base case：空列表和为 0
+    else:
+        return linearSum(L,n-1)+L[n-1]  # 前 n-1 个的和 + 第 n 个
+
+L = [1,100,7]
+print('The sum is:', linearSum(L,len(L)))   # The sum is: 108</pre>
+  <p style="margin-bottom:0">实跑确认：<span class="mono">linearSum([1,100,7], 3) = 108</span>。
+     <b>三个细节</b>：
+     ① 传的是<b>长度 n</b> 而不是切片 —— 课件刻意不写 <span class="mono">L[0] + linearSum(L[1:])</span>，因为切片每次都会复制一份新列表，浪费内存，这点常用来出「下面哪种写法更好」；
+     ② 下标是 <span class="mono">L[n-1]</span>（最后一个元素），递归是<b>从后往前</b>收敛的；
+     ③ base case 返回 <b>0</b> 而不是 <span class="mono">L[0]</span>，这样 <span class="mono">linearSum([], 0)</span> 才不会越界。</p>
+</div>
+
+<div class="card" id="a18">
+  <h4 style="margin-top:0">A18 · 多重递归与英式尺子 <span class="src">AIE Week6 · p35–39</span></h4>
+  <h4>多重递归（p35）</h4>
+  <p>函数在<b>一次执行中发起两次或两次以上</b>递归调用 → <b>multiple recursion（多重递归）</b>。课件给的头号例子是画英式尺子。</p>
+  <h4>英式尺子的递归结构（p37，背下这句就能写出代码）</h4>
+  <pre class="mono">中心刻度长为 n 的区间 = [长为 n−1 的区间] + [一根长为 n 的刻度线] + [长为 n−1 的区间]</pre>
+  <p>配套术语（p36）：整英寸处的长刻度叫 <b>major tick length</b>；英寸之间的短刻度是 <b>minor ticks</b>，
+     间隔依次 1/2、1/4 英寸……；<b>区间每缩小一半，刻度线就短 1</b>。</p>
+  <h4>课件 code.py 原版</h4>
+  <pre class="mono">def draw_line(tickLen, tickLabel=''):
+    line = '-'*tickLen
+    if tickLabel:
+        line += ' '+tickLabel
+    print(line)
+
+def draw_interval(centerLen):
+    if centerLen&gt;0:                     # base case 是「隐式的」：为 0 时整个 if 不执行
+        draw_interval(centerLen-1)
+        draw_line(centerLen)
+        draw_interval(centerLen-1)
+
+def draw_ruler(numInch, majorLen):
+    draw_line(majorLen, '0')
+    for j in range(1,1+numInch):
+        draw_interval(majorLen-1)
+        draw_line(majorLen,str(j))</pre>
+  <h4>实跑输出</h4>
+  <pre class="mono">&gt;&gt;&gt; draw_interval(3)        &gt;&gt;&gt; draw_ruler(1, 3)
+-                           --- 0
+--                          -
+-                           --
+---                         -
+-                           --- 1
+--
+-</pre>
+  <p><b>要记的数</b>：<span class="mono">draw_interval(n)</span> 一共打印 <b>2ⁿ − 1</b> 行
+     （实测 n=1→1 行、n=2→3 行、n=3→7 行、n=4→15 行）。</p>
+  <p style="margin-bottom:0"><b>两个特别之处</b>：
+     ① 这里的 base case 是<b>隐式的</b> —— 没有 else 分支，<span class="mono">centerLen</span> 为 0 时整个 <span class="mono">if</span> 跳过，函数自然结束（返回 None）；
+     ② <span class="mono">draw_interval</span> 是纯多重递归（两次调用），但 <span class="mono">draw_ruler</span> 用 <span class="mono">for</span> 循环串起每一英寸 —— 递归和循环是混着用的。</p>
+</div>
+
+<div class="card" id="a19">
+  <h4 style="margin-top:0">A19 · binarySum：把列表折成两半再求和 <span class="src">AIE Week6 · p40–43</span></h4>
+  <pre class="mono">def binarySum(L, start, stop):
+    if start&gt;=stop:                     # base case ①：空区间
+        return 0
+    elif start==stop-1:                 # base case ②：只剩一个元素
+        return L[start]
+    else:
+        mid = (start+stop)//2
+        return binarySum(L,start,mid)+binarySum(L,mid,stop)    # 两次调用
+
+L = [1,2,3,4]
+print(binarySum(L,0,len(L)))            # 10</pre>
+  <p>实跑确认：<span class="mono">binarySum([1,2,3,4], 0, 4) = 10</span>。</p>
+  <table>
+    <tr><th style="width:120px"></th><th>linearSum（A17）</th><th>binarySum（A19）</th></tr>
+    <tr><td>递归类型</td><td>线性递归（1 次调用）</td><td><b>多重递归</b>（2 次调用）</td></tr>
+    <tr><td>base case 个数</td><td>1 个（n == 0）</td><td><b>2 个</b>（空区间、单元素）</td></tr>
+    <tr><td>递归深度</td><td>n（线性）</td><td>log n（折半）</td></tr>
+    <tr><td>总调用次数</td><td>O(n)</td><td>仍是 O(n) —— 深度短了，但<b>每个元素都要访问一次</b></td></tr>
+  </table>
+  <p style="margin-bottom:0"><b>为什么要有第二个 base case</b>：<span class="mono">start == stop-1</span> 表示区间只剩一个元素，直接返回它。
+     没有这一条，<span class="mono">mid</span> 会一直等于 <span class="mono">start</span>，左右两边一个空、一个还是原区间 → 无限递归。</p>
+</div>
+
+<div class="card" id="a20">
+  <h4 style="margin-top:0">A20 · 斐波那契递归 + f-string <span class="src">AIE Week6 · p44–45</span></h4>
+  <h4>斐波那契（p44）</h4>
+  <p>序列 <span class="mono">0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, …</span>：
+     从第 0、1 项起，<b>每一项都是前两项之和</b>。</p>
+  <pre class="mono">def fib(n):
+    if n &lt;= 1:                          # base case 把 0 和 1 一起兜住
+        return n
+    else:
+        return fib(n-1) + fib(n-2)      # 两次调用 → 多重递归</pre>
+  <p>实测 <span class="mono">fib(0..10) = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55]</span>，<span class="mono">fib(30) = 832040</span>。</p>
+  <p><b>它的代价</b>：<span class="mono">fib(n-1)</span> 和 <span class="mono">fib(n-2)</span> 会<b>重复计算大量相同子问题</b>，调用次数指数级增长。
+     实测 <span class="mono">fib(30)</span> 就要 0.06 秒（结果才 6 位数）；相比之下 <span class="mono">myPower</span> 那种「每层只递归一次」的写法是 O(log n)。
+     这是课件把 fib 放在<b>多重递归</b>一节的用意 —— 多重递归好写，但不一定快。</p>
+  <h4>f-string（p45，顺手带走的一分）</h4>
+  <pre class="mono">n = 5
+print(f'{n} 的阶乘是 {fact(n)}')        # 5 的阶乘是 120
+print(f'1 + 1 = {1+1}')                 # 1 + 1 = 2</pre>
+  <p style="margin-bottom:0">课件原话：<b>前面的 <span class="mono">f</span> 告诉 Python 去求值 <span class="mono">{}</span> 里的表达式，再把结果插进字符串</b>，做动态文本格式化非常好用。
+     本站 18 个专题里一次都没出现过 f-string，这是 AIE 独有的。</p>
+</div>
+
 <h2 class="anchor" id="site-only">只有本站有的一块</h2>
 
 <div class="card tint">
   <h4 style="margin-top:0">NRZI 编码（专题 T4）</h4>
-  <p style="margin-bottom:0">这是本站 18 个专题里唯一在 AIE1001 Week1–Week5 课件中<b>完全找不到</b>的内容。
+  <p style="margin-bottom:0">这是本站 18 个专题里唯一在 AIE1001 Week1–Week6 课件中<b>完全找不到</b>的内容。
      AIE 的 Week1 只讲到「二进制、进制转换、信息单位」就结束了，没有讲任何编码方式（NRZI / 曼彻斯特等都没出现）。
      所以：<b>只在 CSC1001 考，AIE 不考</b> —— 如果时间紧，这块可以只在本站刷一遍就过。
      <a href="index.html#t4">→ 回到本站 T4 专题</a></p>
@@ -668,7 +939,8 @@ line.find("zzz")            # -1</pre>
 <div class="card analysis">
   <ol style="margin-bottom:0">
     <li><b>先按本站的 18 个专题过一遍</b>：23 个知识块是重合的，本站每个专题都有真题 + 答案 + 解析 + 类型题，性价比最高。</li>
-    <li><b>再补这一页的 11 块</b>：尤其 A5（ASCII/Unicode）、A7（浮点精度）、A8（falsy 清单）—— 这三块是 AIE 课件花了整页讲、而本站真题里一次都没出现过的，属于"AIE 会考而 CSC1001 不考"的典型。</li>
+    <li><b>再补这一页的 20 块</b>：Week1–5 部分优先看 A5（ASCII/Unicode）、A7（浮点精度）、A8（falsy 清单）—— 这三块是 AIE 课件花了整页讲、而本站真题里一次都没出现过的。</li>
+    <li><b>Week6 递归（A12–A20）单独留时间</b>：本站 18 个专题里「递归 / recursion / 二分查找」出现 <b>0 次</b>，这一块只能在本页补。建议顺序 A12（两要素）→ A13（阶乘 / 调用栈）→ A14（递归树）→ A15（二分查找，最可能出大题）；A16 的「快速幂为什么仍算线性递归」是典型送分陷阱题。</li>
     <li><b>NRZI 只在 CSC1001 考</b>，反向同理，别把时间按错地方。</li>
     <li><b>注意两边讲法差异</b>：本站偏"真题怎么挖坑"（争议题、逐行注释、答题模板），AIE 课件偏"概念为什么是这样"（抽象层次、IEEE-754 原理）。前者管得分，后者管不翻车。</li>
   </ol>
@@ -677,8 +949,9 @@ line.find("zzz")            # -1</pre>
 <div class="card">
   <p style="margin:0;font-size:13px;color:var(--ink3)">
     对照口径说明：本站一侧依据 2021 / 2022 / 2023 三年真题聚合出的 18 个专题及其「专题分析」；
-    AIE1001 一侧依据 Lecture 1–5（Week1 计算机基础与数据表示、Week2 Python 基础、Week3 流程控制、
-    Week4 函数与字符串 / 文件、Week5 列表 / 字典 / 元组）的课件正文与课内练习。
+    AIE1001 一侧依据 Lecture 1–6（Week1 计算机基础与数据表示、Week2 Python 基础、Week3 流程控制、
+    Week4 函数与字符串 / 文件、Week5 列表 / 字典 / 元组、<b>Week6 递归</b>）的课件正文、课内练习与配套 code.py。
+    Week6 部分的代码均取自课件附件 <span class="mono">code.py</span>，所有输出与数值均在本机 Python 3.13 实跑核对过。
     「只有 AIE 有」= 该知识点在 AIE 课件中出现，但在本站全文中检索不到对应关键词。
     <b>本站真题为 2021–2023 旧卷，两门课的实际范围请以本学期 syllabus 为准。</b>
   </p>
